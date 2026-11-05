@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFNC Esports</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#fff;--secondary:#a0a0a0;--bg-dark:#050505;--bg-card:#111;--gold:#ffd700;--silver:#c0c0c0;--bronze:#cd7f32;--danger:#f33;--success:#00ff88;--accent:#00e5ff;--admin-color:#f0f;--member-color:#00e5ff;--glow:0 0 10px rgba(255,255,255,.8),0 0 20px rgba(255,255,255,.4);--border:1px solid rgba(255,255,255,.2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg-dark);color:#fff;font-family:'Rajdhani',sans-serif;font-size:1rem;letter-spacing:2px;min-height:100vh}
+h1,h2,h3,h4{font-family:'Orbitron',sans-serif;text-transform:uppercase}
+.bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes pulseGlow{0%,100%{text-shadow:0 0 6px rgba(255,255,255,.4)}50%{text-shadow:0 0 14px #fff,0 0 30px rgba(255,255,255,.6)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes scaleBounce{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.admin-only{display:none!important}
+body.is-admin .admin-only{display:block!important}
+body.is-admin li.admin-only{display:list-item!important}
+body.is-admin button.admin-only{display:inline-block!important}
+.login-screen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a1a1a 0%,#050505 70%);padding:20px}
+.login-screen.hidden{display:none}
+.login-box{width:100%;max-width:400px;border:2px solid #fff;box-shadow:var(--glow);background:rgba(5,5,5,.9);padding:45px 35px;text-align:center}
+.login-icon{font-size:3.5rem;animation:pulseGlow 3s infinite}
+.login-title{font-size:1.8rem;letter-spacing:3px;margin:10px 0 5px}
+.login-sub{color:var(--secondary);text-transform:uppercase;margin-bottom:25px;font-size:.9rem}
+input,select,textarea{width:100%;background:#0a0a0a;border:1px solid #333;color:#fff;padding:12px 14px;font-family:'Rajdhani',sans-serif;font-size:1rem;letter-spacing:1px;margin-bottom:14px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#fff;box-shadow:0 0 8px rgba(255,255,255,.4)}
+input:disabled{opacity:.5}
+input.error{animation:shake .4s;border-color:var(--danger)}
+select option{background:#111}
+textarea{min-height:100px;resize:vertical}
+.btn-login{width:100%;background:#fff;color:#000;border:none;padding:13px;font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:3px;cursor:pointer;transition:.3s}
+.btn-login:hover{box-shadow:var(--glow)}
+.login-error{color:var(--danger);text-transform:uppercase;min-height:20px;margin:12px 0;font-size:.85rem;font-weight:700}
+.login-hint{border:1px dashed rgba(255,255,255,.25);padding:10px;color:var(--secondary);font-size:.8rem;text-align:left;line-height:1.6}
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 4%;background:rgba(5,5,5,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:var(--border)}
+.logo-small{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.5rem;text-shadow:var(--glow);cursor:pointer}
+nav ul{display:flex;gap:18px;list-style:none}
+nav a{color:var(--secondary);text-transform:uppercase;font-size:.75rem;font-weight:700;cursor:pointer;padding:6px 0;position:relative;transition:.3s}
+nav a:hover{color:#fff;text-shadow:var(--glow)}
+nav a.active{color:#fff}
+nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent);box-shadow:0 0 8px #fff}
+nav a.admin-link{color:var(--admin-color)}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-badge{font-size:.85rem;text-transform:uppercase;font-weight:700}
+.role-badge{padding:4px 12px;border:1px solid;font-size:.7rem;text-transform:uppercase;border-radius:3px;font-weight:700;display:inline-block}
+.role-badge.admin{color:var(--admin-color);border-color:var(--admin-color)}
+.role-badge.member{color:var(--member-color);border-color:var(--member-color)}
+.btn-logout{background:transparent;border:1px solid var(--danger);color:var(--danger);padding:6px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;cursor:pointer;text-transform:uppercase;transition:.3s}
+.btn-logout:hover{background:var(--danger);color:#fff}
+.layer{display:none;padding:120px 5% 60px;max-width:1300px;margin:0 auto}
+.layer.active{display:block;animation:fadeIn .6s}
+.section-title{text-align:center;font-size:2.4rem;letter-spacing:5px;text-shadow:var(--glow)}
+.section-sub{text-align:center;color:var(--secondary);text-transform:uppercase;letter-spacing:4px;margin:8px 0 40px}
+.sub-title{text-align:center;font-size:1.3rem;letter-spacing:4px;margin-top:50px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.card,.stat-box,.game-card,.apparel-card{position:relative;transition:.3s}
+.card:hover,.stat-box:hover,.game-card:hover,.apparel-card:hover{border-color:#fff;box-shadow:var(--glow);transform:translateY(-5px)}
+.card{background:var(--bg-card);border:var(--border);padding:30px 20px;text-align:center}
+.edit-btn{position:absolute;top:8px;right:8px;z-index:2;background:rgba(255,0,255,.1);border:1px solid var(--admin-color);color:#fff;padding:3px 8px;font-size:.7rem;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;transition:.3s}
+.edit-btn:hover{background:var(--admin-color);box-shadow:0 0 10px var(--admin-color)}
+.btn-neon{background:transparent;border:2px solid #fff;color:#fff;padding:13px 30px;font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:.3s}
+.btn-neon:hover{background:#fff;color:#000;box-shadow:var(--glow)}
+.btn-neon.full{width:100%}
+.home-wrap{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.hero-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:7rem;letter-spacing:15px;text-shadow:var(--glow);animation:pulseGlow 3s infinite}
+.hero-subtitle{font-size:1.2rem;letter-spacing:6px;text-transform:uppercase;color:var(--secondary);margin:10px 0 18px}
+.greet{font-weight:700;font-size:1.1rem;margin-bottom:28px;text-transform:uppercase}
+.greet.admin{color:var(--admin-color)}.greet.member{color:var(--member-color)}
+.cta{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-bottom:50px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;width:100%;max-width:1000px;margin:0 auto}
+.stat-box{background:var(--bg-card);border:var(--border);padding:25px;text-align:center}
+.stat-num{font-family:'Orbitron',sans-serif;font-size:2.5rem;font-weight:700}
+.stat-label{color:var(--secondary);text-transform:uppercase;font-size:.85rem}
+.member-img{width:100px;height:100px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:2.8rem;margin:0 auto 15px;background:#0a0a0a}
+.rank-badge{display:inline-block;border:1px solid #fff;padding:5px 15px;text-transform:uppercase;font-size:.75rem;margin-bottom:12px}
+.member-name{font-size:1.1rem;margin-bottom:6px}
+.member-role{color:var(--secondary);text-transform:uppercase;font-size:.85rem;margin-bottom:10px}
+.member-id{font-size:.85rem;color:var(--secondary)}
+.status-online,.status-offline{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+.status-online{background:var(--success);box-shadow:0 0 8px var(--success);animation:blink 2s infinite}
+.status-offline{background:var(--danger)}
+.game-card{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border:var(--border);text-align:center;padding:10px}
+.game-icon{font-size:3rem;margin-bottom:10px}
+.game-name{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase}
+.game-div{color:var(--secondary);font-size:.75rem;text-transform:uppercase;margin-top:6px}
+.gold-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
+.gold-box{background:var(--bg-card);border:1px solid rgba(255,215,0,.3);padding:22px;text-align:center;transition:.3s}
+.gold-box:hover{border-color:var(--gold);box-shadow:0 0 15px rgba(255,215,0,.4);transform:translateY(-5px)}
+.gold-num{font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:900;color:var(--gold);text-shadow:0 0 12px rgba(255,215,0,.6)}
+.gold-label{color:var(--secondary);text-transform:uppercase;font-size:.8rem}
+.timeline{position:relative;max-width:1000px;margin:40px auto 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,#fff 15%,#fff 85%,transparent)}
+.tl-item{position:relative;width:50%;padding:0 40px 40px 0}
+.tl-item:nth-child(even){margin-left:50%;padding:0 0 40px 40px}
+.tl-card{position:relative;background:var(--bg-card);border:var(--border);padding:20px;transition:.3s}
+.tl-card:hover{border-color:#fff;box-shadow:var(--glow);transform:translateY(-5px)}
+.tl-item::after{content:'';position:absolute;top:22px;right:-6px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:var(--glow)}
+.tl-item:nth-child(even)::after{right:auto;left:-6px}
+.tl-date{color:var(--secondary);font-size:.85rem;text-transform:uppercase}
+.tl-title{font-size:1rem;margin:6px 0}
+.tl-desc{color:var(--secondary);margin-bottom:12px}
+.tl-badge{display:inline-block;padding:4px 12px;font-size:.75rem;font-weight:700;border:1px solid}
+.rank-1{color:var(--gold);border-color:var(--gold)}.rank-2{color:var(--silver);border-color:var(--silver)}.rank-3{color:var(--bronze);border-color:var(--bronze)}
+.rec-card{position:relative;overflow:hidden;background:var(--bg-card);border:var(--border);padding:25px;transition:.3s}
+.rec-card::before{content:'🏆';position:absolute;top:8px;right:12px;font-size:4rem;opacity:.05}
+.rec-card:hover{border-color:var(--gold);box-shadow:0 0 15px rgba(255,215,0,.4);transform:translateY(-5px)}
+.rec-card h3{font-size:1rem;margin-bottom:15px}
+.data-row{display:flex;justify-content:space-between;gap:15px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+.data-row span:first-child{color:var(--secondary);text-transform:uppercase;font-size:.85rem}
+.rec-card .data-row span:last-child{font-family:'Orbitron',sans-serif;color:var(--gold);font-size:.9rem}
+.box{max-width:1000px;margin:0 auto 30px;background:var(--bg-card);border:var(--border);padding:30px;position:relative}
+.box h3{margin-bottom:20px;font-size:1.1rem}
+.profile-header{display:flex;align-items:center;gap:30px}
+.profile-avatar{width:120px;height:120px;border-radius:50%;border:3px solid #fff;box-shadow:var(--glow);display:flex;align-items:center;justify-content:center;font-size:4rem;flex-shrink:0}
+.profile-name{font-family:'Orbitron',sans-serif;font-size:2rem;margin-bottom:8px}
+.form-group label,.flabel{display:block;color:var(--secondary);text-transform:uppercase;font-size:.8rem;margin-bottom:6px}
+.box .data-row span:last-child{text-align:right;word-break:break-word}
+.rate-bar-container{margin-bottom:18px}
+.rate-label{display:flex;justify-content:space-between;text-transform:uppercase;font-size:.85rem;margin-bottom:6px}
+.rate-bar{height:14px;background:#0a0a0a;border:1px solid #333;border-radius:10px;overflow:hidden}
+.rate-fill{height:100%;width:0;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--success));transition:width 1.5s ease-out}
+.rate-fill.gold{background:linear-gradient(90deg,#b8860b,var(--gold))}
+.rate-fill.danger{background:linear-gradient(90deg,#800,var(--danger))}
+.sp-display{text-align:center;padding:25px;background:linear-gradient(135deg,rgba(0,229,255,.12),rgba(0,229,255,.02));border:2px solid var(--accent);border-radius:10px;margin-bottom:20px}
+.sp-number{font-family:'Orbitron',sans-serif;font-size:3.5rem;font-weight:900;color:var(--accent);text-shadow:0 0 15px var(--accent);display:inline-block}
+.sp-number.bump{animation:scaleBounce .4s}
+.sp-label{color:var(--secondary);text-transform:uppercase}
+.sp-actions{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}
+.sp-btn{flex:1;min-width:140px;background:transparent;border:2px solid;padding:12px;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:.3s}
+.sp-btn.give{color:var(--accent);border-color:var(--accent)}.sp-btn.give:hover{background:var(--accent);color:#000;box-shadow:0 0 15px var(--accent)}
+.sp-btn.deduct{color:var(--danger);border-color:var(--danger)}.sp-btn.deduct:hover{background:var(--danger);color:#fff;box-shadow:0 0 15px var(--danger)}
+.sp-log{max-height:150px;overflow-y:auto;background:#0a0a0a;border:1px solid #222;padding:10px}
+.sp-log div{padding:6px 0;border-bottom:1px dashed #333;font-size:.85rem}
+.sp-log .plus{color:var(--success)}.sp-log .minus{color:var(--danger)}
+.apparel-card{background:var(--bg-card);border:var(--border);padding:20px;text-align:center}
+.apparel-img{height:260px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a1a,#0a0a0a);border:1px dashed #444;color:var(--secondary);margin-bottom:15px;font-size:.85rem}
+.apparel-name{font-size:1rem;margin-bottom:6px}
+.apparel-price{color:var(--gold);font-weight:700;margin-bottom:14px}
+.btn-small{background:transparent;border:1px solid #fff;color:#fff;padding:8px 20px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.3s}
+.btn-small:hover{background:#fff;color:#000;box-shadow:var(--glow)}
+.btn-small.del{border-color:var(--danger);color:var(--danger)}.btn-small.del:hover{background:var(--danger);color:#fff;box-shadow:none}
+.btn-small.sm{padding:4px 10px;font-size:.75rem;margin-right:4px}
+.form-container{max-width:600px;margin:0 auto;background:var(--bg-card);border:var(--border);padding:50px 40px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:35px 0 25px}
+.tab-btn{background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--secondary);padding:10px 18px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.3s}
+.tab-btn:hover{color:#fff;border-color:#fff}
+.tab-btn.active{color:#fff;border-color:var(--admin-color);box-shadow:0 0 12px rgba(255,0,255,.5)}
+.tab-pane{display:none}.tab-pane.active{display:block;animation:fadeIn .6s}
+.pane-bar{margin-bottom:15px}
+.table-wrap{overflow-x:auto;background:var(--bg-card);border:var(--border)}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{padding:10px 12px;border-bottom:1px dashed rgba(255,255,255,.15);text-align:left;font-size:.9rem}
+th{color:var(--secondary);text-transform:uppercase;font-size:.75rem}
+.modal-bg{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;padding:15px}
+.modal-bg.open{display:flex}
+.modal-box{width:100%;max-width:480px;max-height:90vh;overflow-y:auto;background:#0a0a0a;border:2px solid #fff;box-shadow:var(--glow);padding:30px}
+.modal-box h3{margin-bottom:20px;font-size:1.1rem}
+.modal-actions{display:flex;gap:12px;margin-top:6px}
+.modal-actions button{flex:1;padding:11px;font-family:'Orbitron',sans-serif;font-size:.8rem;letter-spacing:2px;cursor:pointer;background:transparent;border:2px solid;transition:.3s}
+.m-save{color:var(--success);border-color:var(--success)}.m-save:hover{background:var(--success);color:#000}
+.m-cancel{color:var(--danger);border-color:var(--danger)}.m-cancel:hover{background:var(--danger);color:#fff}
+footer{text-align:center;padding:40px 5%;border-top:1px solid rgba(160,160,160,.2);color:var(--secondary);text-transform:uppercase;font-size:.85rem}
+footer small{display:block;font-size:.7rem;margin-top:6px}
+.est{font-family:'Orbitron',sans-serif;color:var(--gold);letter-spacing:6px;font-size:.9rem;margin:-4px 0 12px;text-shadow:0 0 10px rgba(255,215,0,.5)}
+body.is-admin header{border-bottom-color:var(--admin-color);box-shadow:0 2px 14px rgba(255,0,255,.35)}
+body.is-member header{border-bottom-color:var(--member-color);box-shadow:0 2px 14px rgba(0,229,255,.3)}
+.mid-tag{display:block;font-family:'Orbitron',sans-serif;font-size:.75rem;color:var(--accent);letter-spacing:2px;margin-bottom:8px}
+.toast{position:fixed;top:90px;left:50%;transform:translateX(-50%) translateY(-20px);z-index:1500;background:#0a0a0a;border:2px solid;padding:12px 24px;font-weight:700;text-transform:uppercase;opacity:0;pointer-events:none;transition:.4s;text-align:center;max-width:92%}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast.admin{color:var(--admin-color);border-color:var(--admin-color);box-shadow:0 0 18px rgba(255,0,255,.5)}
+.toast.member{color:var(--member-color);border-color:var(--member-color);box-shadow:0 0 18px rgba(0,229,255,.5)}
+.search-box{max-width:600px;margin:0 auto 12px;display:flex;gap:10px;flex-wrap:wrap}
+.search-box input{flex:1;min-width:200px;margin:0}
+.search-hint{text-align:center;color:var(--secondary);font-size:.8rem;margin-bottom:28px}
+.result-wrap{max-width:600px;margin:0 auto 35px}
+.result-card{background:var(--bg-card);border:2px solid var(--accent);box-shadow:0 0 15px rgba(0,229,255,.3);padding:25px;text-align:center}
+.result-card .data-row span:last-child{text-align:right;word-break:break-word}
+.result-empty{text-align:center;color:var(--danger);font-weight:700;text-transform:uppercase}
+.rule-item{position:relative;display:flex;gap:18px;background:var(--bg-card);border:var(--border);padding:18px 20px;margin:0 auto 14px;max-width:800px;transition:.3s}
+.rule-item:hover{border-color:#fff;box-shadow:var(--glow);transform:translateY(-5px)}
+.rule-no{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.4rem;color:var(--gold);min-width:36px}
+.rule-item h4{font-size:.95rem;margin-bottom:6px}
+.rule-item p{color:var(--secondary)}
+@media(max-width:768px){
+.hero-logo{font-size:3.5rem;letter-spacing:6px}.hero-subtitle{font-size:.9rem;letter-spacing:3px}
+nav ul{gap:8px;flex-wrap:wrap}nav a{font-size:.6rem}
+header{flex-wrap:wrap;gap:10px}.section-title{font-size:1.6rem}
+.layer{padding:110px 5% 40px}.form-container{padding:30px 20px}
+.logo-small{font-size:1.2rem}.user-badge{font-size:.7rem}
+.timeline::before{left:20px}
+.tl-item,.tl-item:nth-child(even){width:100%;margin-left:0;padding:0 0 30px 50px}
+.tl-item::after,.tl-item:nth-child(even)::after{left:14px;right:auto}
+.login-box{padding:35px 25px}.login-title{font-size:1.4rem}
+.profile-header{padding:25px;flex-direction:column;text-align:center;justify-content:center}
+.profile-avatar{width:90px;height:90px;font-size:3rem}.profile-name{font-size:1.5rem}
+.sp-number{font-size:2.5rem}.modal-box{width:95%;padding:22px}}
+@media(max-width:480px){.grid,.stats,.gold-stats{grid-template-columns:1fr}.hero-logo{font-size:2.8rem}body{font-size:.95rem}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="login-icon">🛡️</div>
+    <h1 class="login-title">NFNC LOGIN</h1>
+    <p class="login-sub">Member Access Only</p>
+    <input type="text" id="loginUser" placeholder="USERNAME" autocomplete="off">
+    <input type="password" id="loginPass" placeholder="PASSWORD" autocomplete="off">
+    <button class="btn-login" onclick="doLogin()">LOGIN</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-hint">🔑 Demo Account<br>👑 admin / admin123 (NFNC-0001)<br>👤 member / member123 (NFNC-0002)<br>👤 viper / viper123 (NFNC-0003)</div>
+  </div>
+</div>
+
+<header>
+  <div class="logo-small" onclick="showLayer('home')">NFNC</div>
+  <nav><ul>
+    <li><a data-layer="home" class="active" onclick="showLayer('home')">Home</a></li>
+    <li><a data-layer="members" onclick="showLayer('members')">Members</a></li>
+    <li><a data-layer="games" onclick="showLayer('games')">Games</a></li>
+    <li><a data-layer="achievements" onclick="showLayer('achievements')">Rekor</a></li>
+    <li><a data-layer="profile" onclick="showLayer('profile')">Profile</a></li>
+    <li><a data-layer="apparel" onclick="showLayer('apparel')">Apparel</a></li>
+    <li><a data-layer="recruit" onclick="showLayer('recruit')">Recruit</a></li>
+    <li><a data-layer="rules" onclick="showLayer('rules')">Rules</a></li>
+    <li class="admin-only"><a data-layer="adminPanel" class="admin-link" onclick="showLayer('adminPanel')">Admin Panel</a></li>
+  </ul></nav>
+  <div class="header-right">
+    <span class="user-badge">👤 <span id="headerUser">—</span></span>
+    <span class="role-badge member" id="headerRole">👤 MEMBER</span>
+    <button class="btn-logout" onclick="doLogout()">Logout</button>
+  </div>
+</header>
+
+<div id="home" class="layer active">
+  <div class="home-wrap">
+    <div class="hero-logo">NFNC</div>
+    <p class="est">EST. 2022</p>
+    <p class="hero-subtitle">Never Forget Never Compromise</p>
+    <p class="greet member" id="greet"></p>
+    <div class="cta">
+      <button class="btn-neon" onclick="showLayer('profile')">My Profile</button>
+      <button class="btn-neon" onclick="showLayer('achievements')">View Records</button>
+    </div>
+    <div class="stats">
+      <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">Members</div></div>
+      <div class="stat-box"><div class="stat-num">04</div><div class="stat-label">Divisions</div></div>
+      <div class="stat-box"><div class="stat-num">25+</div><div class="stat-label">Wins</div></div>
+      <div class="stat-box"><div class="stat-num">2022</div><div class="stat-label">Established</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="members" class="layer">
+  <h2 class="section-title">SQUAD IDENTITY</h2>
+  <p class="section-sub">Meet Our Official Roster</p>
+  <div class="search-box"><input type="text" id="searchId" placeholder="CARI ID MEMBER (CONTOH: NFNC-0002)" autocomplete="off"><button class="btn-neon" onclick="searchMember()">CARI</button></div>
+  <p class="search-hint">Cari dengan ID Member (NFNC-xxxx) atau ID Game.</p>
+  <div class="result-wrap" id="searchResult"></div>
+  <div class="grid" id="memberGrid"></div>
+</div>
+
+<div id="games" class="layer">
+  <h2 class="section-title">GAME DIVISION</h2>
+  <p class="section-sub">We Compete in These Games</p>
+  <div class="grid" id="gameGrid"></div>
+</div>
+
+<div id="achievements" class="layer">
+  <h2 class="section-title">REKOR COLI NFNC</h2>
+  <p class="section-sub">Tournament Records &amp; Achievements</p>
+  <div class="gold-stats">
+    <div class="gold-box"><div class="gold-num">🏆 25</div><div class="gold-label">Total Juara 1</div></div>
+    <div class="gold-box"><div class="gold-num">🥈 18</div><div class="gold-label">Runner Up</div></div>
+    <div class="gold-box"><div class="gold-num">🥉 12</div><div class="gold-label">Peringkat 3</div></div>
+    <div class="gold-box"><div class="gold-num">🎯 78%</div><div class="gold-label">Win Rate</div></div>
+    <div class="gold-box"><div class="gold-num">⭐ 42</div><div class="gold-label">MVP Awards</div></div>
+  </div>
+  <h3 class="sub-title">TIMELINE PRESTASI</h3>
+  <p class="section-sub" style="margin-bottom:0">Perjalanan Rekor Coli NFNC</p>
+  <div class="timeline" id="timeline"></div>
+  <h3 class="sub-title">REKOR PER GAME</h3>
+  <p class="section-sub">Statistik Kemenangan per Divisi</p>
+  <div class="grid" id="recGrid"></div>
+</div>
+
+<div id="profile" class="layer">
+  <h2 class="section-title">MY PROFILE</h2>
+  <p class="section-sub">Member Dashboard</p>
+  <div class="box profile-header">
+    <div class="profile-avatar">👤</div>
+    <div><div class="profile-name" id="profName">—</div><span class="mid-tag" id="profMid"></span><span class="role-badge member" id="profRole">👤 MEMBER</span></div>
+  </div>
+  <div class="box">
+    <div class="form-group"><label for="pNama">Nama Lengkap</label><input type="text" id="pNama"></div>
+    <div class="form-group"><label for="pNick">Nickname</label><input type="text" id="pNick"></div>
+    <div class="form-group"><label for="pUmur">Umur</label><input type="number" id="pUmur" min="0"></div>
+    <div class="form-group"><label for="pId">ID Game</label><input type="text" id="pId"></div>
+    <div class="form-group"><label for="pGame">Game Utama</label><select id="pGame"><option value="">— Pilih —</option><option>Mobile Legends</option><option>PUBG Mobile</option><option>Free Fire</option><option>Valorant</option></select></div>
+    <div class="form-group"><label for="pRole">Role</label><select id="pRole"><option value="">— Pilih —</option><option>Rusher</option><option>Sniper</option><option>Support</option><option>IGL</option><option>Entry Fragger</option></select></div>
+    <div class="form-group"><label for="pWa">No. WhatsApp</label><input type="text" id="pWa"></div>
+    <div class="form-group"><label for="pAlamat">Alamat/Kota</label><input type="text" id="pAlamat"></div>
+    <div class="form-group"><label for="pBio">Bio singkat</label><textarea id="pBio"></textarea></div>
+    <button class="btn-neon full" onclick="saveProfile()">💾 SAVE DATA DIRI</button>
+  </div>
+  <div class="box"><h3>📋 DATA DIRI</h3><div id="dataDisplay"></div></div>
+  <div class="box"><h3>📊 PERFORMANCE RATING</h3><div id="ratingList"></div></div>
+  <div class="box">
+    <h3>💎 SOCIAL POINT</h3>
+    <div class="sp-display"><div class="sp-number" id="spNumber">0</div><div class="sp-label">SOCIAL POINT</div></div>
+    <div class="sp-actions">
+      <button class="sp-btn give" onclick="addSP(10)">+ GIVE SP</button>
+      <button class="sp-btn deduct" onclick="addSP(-5)">- DEDUCT SP</button>
+    </div>
+    <div class="sp-log" id="spLog"></div>
+  </div>
+</div>
+
+<div id="apparel" class="layer">
+  <h2 class="section-title">OFFICIAL APPAREL</h2>
+  <p class="section-sub">NFNC Merchandise Collection</p>
+  <div class="grid" id="apparelGrid"></div>
+</div>
+
+<div id="recruit" class="layer">
+  <h2 class="section-title">JOIN NFNC</h2>
+  <p class="section-sub">Recruitment Form 2024</p>
+  <form class="form-container" id="recruitForm" onsubmit="submitRecruit(event)">
+    <input type="text" placeholder="NAMA LENGKAP / NICKNAME" required>
+    <input type="text" placeholder="ID GAME" required>
+    <select required><option value="">PILIH GAME</option><option>Mobile Legends</option><option>PUBG Mobile</option><option>Free Fire</option><option>Valorant</option></select>
+    <select required><option value="">ROLE / POSISI</option><option>Rusher</option><option>Sniper</option><option>Support</option><option>IGL</option><option>Entry Fragger</option></select>
+    <textarea placeholder="ALASAN BERGABUNG" required></textarea>
+    <button type="submit" class="btn-neon full">SUBMIT APPLICATION</button>
+  </form>
+</div>
+
+<div id="rules" class="layer">
+  <h2 class="section-title">RULES NFNC</h2>
+  <p class="section-sub">Aturan Wajib Semua Anggota</p>
+  <div id="rulesList"></div>
+  <div style="text-align:center;margin-top:20px"><button class="btn-small admin-only" onclick="addEntity('rules')">+ TAMBAH RULE</button></div>
+</div>
+
+<div id="adminPanel" class="layer">
+  <h2 class="section-title" style="color:var(--admin-color)">ADMIN CONTROL PANEL</h2>
+  <p class="section-sub">Full Access — Manage All Content</p>
+  <div class="stats" id="adminStats"></div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="members" onclick="switchAdminTab('members')">👥 MANAGE MEMBERS</button>
+    <button class="tab-btn" data-tab="rekor" onclick="switchAdminTab('rekor')">🏆 MANAGE REKOR</button>
+    <button class="tab-btn" data-tab="games" onclick="switchAdminTab('games')">🎮 MANAGE GAMES</button>
+    <button class="tab-btn" data-tab="rules" onclick="switchAdminTab('rules')">📜 MANAGE RULES</button>
+    <button class="tab-btn" data-tab="users" onclick="switchAdminTab('users')">🔐 MANAGE USERS</button>
+  </div>
+  <div class="tab-pane active" id="tab-members"><div class="pane-bar"><button class="btn-small" onclick="addEntity('members')">+ TAMBAH MEMBER</button></div><div class="table-wrap" id="tbl-members"></div></div>
+  <div class="tab-pane" id="tab-rekor"><div class="pane-bar"><button class="btn-small" onclick="addEntity('rekor')">+ TAMBAH REKOR</button></div><div class="table-wrap" id="tbl-rekor"></div></div>
+  <div class="tab-pane" id="tab-games"><div class="pane-bar"><button class="btn-small" onclick="addEntity('games')">+ TAMBAH GAME</button></div><div class="table-wrap" id="tbl-games"></div></div>
+  <div class="tab-pane" id="tab-rules"><div class="pane-bar"><button class="btn-small" onclick="addEntity('rules')">+ TAMBAH RULE</button></div><div class="table-wrap" id="tbl-rules"></div></div>
+  <div class="tab-pane" id="tab-users"><div class="pane-bar"><button class="btn-small" onclick="addUser()">+ TAMBAH USER</button></div><div class="table-wrap" id="tbl-users"></div></div>
+</div>
+
+<footer>© 2022–2024 NFNC ESPORTS. ALL RIGHTS RESERVED.<small>Established 2022 — Designed for NFNC Squad</small></footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+    <div class="modal-actions"><button class="m-save" onclick="modalSubmit()">SAVE</button><button class="m-cancel" onclick="closeModal()">CANCEL</button></div>
+  </div>
+</div>
+
+<script>
+var USERS = {
+  "admin":  { password: "admin123",  role: "admin",  name: "NFNC | GHOST", mid: "NFNC-0001" },
+  "member": { password: "member123", role: "member", name: "NFNC | STORM", mid: "NFNC-0002" },
+  "viper":  { password: "viper123",  role: "member", name: "NFNC | VIPER", mid: "NFNC-0003" }
+};
+var DEF = {
+  members: [["Commander","NFNC | GHOST","Leader / Strategist","online","12345678"],["Captain","NFNC | VIPER","Entry Fragger","online","87654321"],["Lieutenant","NFNC | ZERO","Sniper / Support","online","45678912"],["Sergeant","NFNC | BLAZE","Rusher / IGL","online","22334455"],["Corporal","NFNC | NOVA","Support / Medic","offline","99887766"],["Rookie","NFNC | STORM","Trainee","online","11223344"]].map(function(m,i){return {id:i+1,rank:m[0],name:m[1],role:m[2],online:m[3],gid:m[4]};}),
+  games: [["🎮","Mobile Legends","Bang Bang Division"],["🔫","PUBG Mobile","Battle Royale Division"],["🎯","Free Fire","Clash Squad Division"],["⚔️","Valorant","Tactical FPS Division"]].map(function(g,i){return {id:i+1,icon:g[0],name:g[1],div:g[2]};}),
+  rekor: [["2024 - JANUARI","Mobile Legends Championship","Juara 1 Turnamen MLBB Season 12 Regional Jakarta.","1"],["2024 - MARET","PUBG Mobile Scrims Cup","Juara 2 Turnamen PUBG Mobile Scrims Cup.","2"],["2024 - JUNI","Free Fire Battle Royale","Juara 1 Free Fire Battle Royale tingkat Nasional.","1"],["2024 - AGUSTUS","Valorant Community Cup","Peringkat 3 Valorant Community Cup.","3"],["2024 - OKTOBER","MLBB National Tournament","Juara 1 MLBB National Tournament Season 13.","1"]].map(function(r,i){return {id:i+1,date:r[0],title:r[1],desc:r[2],rank:r[3]};}),
+  rules: [["Hormati sesama anggota","Dilarang menghina, toxic, atau merendahkan sesama anggota maupun lawan."],["Ikuti latihan terjadwal","Wajib hadir saat scrim dan latihan. Jika berhalangan, izin ke admin minimal 1 jam sebelumnya."],["Dilarang curang","Cheat, hack, mod, dan joki akun dilarang keras di semua divisi."],["Komunikasi aktif","Gunakan voice dan chat tim dengan sopan, singkat, dan jelas saat bertanding."],["Jaga nama baik NFNC","Bersikap baik di dalam dan di luar game, termasuk di media sosial."],["Ikuti keputusan strategi","Keputusan draft dan strategi mengikuti Leader atau IGL saat pertandingan."],["Sanksi pelanggaran","Pelanggaran diproses bertahap: peringatan, pengurangan SP, lalu dikeluarkan dari tim."]].map(function(r,i){return {id:i+1,title:r[0],desc:r[1]};}),
+  apparel: [["JERSEY","NFNC Jersey 2024","IDR 250.000"],["HOODIE","NFNC Dark Hoodie","IDR 350.000"],["CAP","NFNC Snapback Cap","IDR 100.000"],["JACKET","NFNC Varsity Jacket","IDR 450.000"]].map(function(a,i){return {id:i+1,label:a[0],name:a[1],price:a[2]};})
+};
+var KEYS = {members:'nfnc_members',rekor:'nfnc_rekor',games:'nfnc_games',apparel:'nfnc_apparel',users:'nfnc_users_db',rules:'nfnc_rules'};
+var RECORDS = [["Mobile Legends",128,102,26,"79.6%","12x"],["PUBG Mobile",96,68,28,"70.8%","7x"],["Free Fire",84,62,22,"73.8%","5x"],["Valorant",62,48,14,"77.4%","3x"]];
+var RATINGS = [["Skill Rating",85],["Teamwork",92],["Communication",78],["Discipline",88],["Overall Performance",86]];
+var FIELDS = [["pNama","Nama Lengkap"],["pNick","Nickname"],["pUmur","Umur"],["pId","ID Game"],["pGame","Game Utama"],["pRole","Role"],["pWa","No. WhatsApp"],["pAlamat","Alamat"],["pBio","Bio"]];
+var RANKS = {"1":["🏆 JUARA 1","rank-1"],"2":["🥈 RUNNER UP","rank-2"],"3":["🥉 PERINGKAT 3","rank-3"]};
+var ENT = {
+  members:{label:'Member',fe:'editMember',fd:'deleteMember',
+    fields:[['name','Nama','text'],['rank','Rank','text'],['role','Role','text'],['gid','ID Game','text'],['online','Status','select',['online','offline']]],
+    cols:[['Nama',function(x){return x.name;}],['Rank',function(x){return x.rank;}],['Role',function(x){return x.role;}],['ID Game',function(x){return x.gid;}],['Status',function(x){return x.online==='online'?'🟢 online':'🔴 offline';}]]},
+  rekor:{label:'Rekor',fe:'editRekor',fd:'deleteRekor',
+    fields:[['date','Tanggal','text'],['title','Judul','text'],['desc','Deskripsi','textarea'],['rank','Rank','select',['1','2','3']]],
+    cols:[['Tanggal',function(x){return x.date;}],['Judul',function(x){return x.title;}],['Rank',function(x){return (RANKS[x.rank]||RANKS['1'])[0];}]]},
+  games:{label:'Game',fe:'editGame',fd:'deleteGame',
+    fields:[['name','Nama Game','text'],['div','Divisi','text'],['icon','Icon (emoji)','text']],
+    cols:[['Game',function(x){return x.name;}],['Divisi',function(x){return x.div;}],['Icon',function(x){return x.icon;}]]},
+  rules:{label:'Rule',fe:'editRule',fd:'deleteRule',
+    fields:[['title','Judul Rule','text'],['desc','Isi Rule','textarea']],
+    cols:[['Judul',function(x){return x.title;}],['Isi',function(x){return x.desc;}]]},
+  apparel:{label:'Apparel',
+    fields:[['name','Nama Produk','text'],['price','Harga','text'],['label','Label Foto','text']]}
+};
+var S = {}, currentUser = '', currentRole = 'member', currentName = '', modalSave = null;
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function rget(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function rset(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function rdel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+function jget(k){ try{ return JSON.parse(rget(k)); }catch(e){ return null; } }
+function jset(k,v){ rset(k,JSON.stringify(v)); }
+function has(o,k){ return Object.prototype.hasOwnProperty.call(o,k); }
+function guard(){
+  if(currentRole!=='admin'){ alert('⛔ Akses ditolak. Menu ini hanya untuk Admin.'); return false; }
+  return true;
+}
+
+function initData(){
+  ['members','rekor','games','apparel','rules'].forEach(function(k){
+    var v = jget(KEYS[k]);
+    if(!Array.isArray(v)){ v = JSON.parse(JSON.stringify(DEF[k])); jset(KEYS[k],v); }
+    S[k] = v;
+  });
+  var u = jget(KEYS.users);
+  if(!u || typeof u!=='object' || Array.isArray(u)){ u = JSON.parse(JSON.stringify(USERS)); jset(KEYS.users,u); }
+  S.users = u;
+  var changed = false;
+  Object.keys(S.users).forEach(function(k){ if(!S.users[k].mid){ S.users[k].mid = genMid(); changed = true; } });
+  if(changed) persist('users');
+}
+function genMid(){
+  var m = 0;
+  Object.keys(S.users).forEach(function(k){ var n = parseInt(String(S.users[k].mid||'').replace(/\D/g,''),10); if(!isNaN(n) && n>m) m = n; });
+  return 'NFNC-'+('0000'+(m+1)).slice(-4);
+}
+function persist(k){ jset(KEYS[k], S[k]); }
+function nextId(arr){ return arr.reduce(function(m,x){ return Math.max(m,x.id); },0)+1; }
+
+/* ---------- login ---------- */
+function startSession(u,announce){
+  var rec = S.users[u];
+  currentUser = u; currentRole = rec.role==='admin' ? 'admin' : 'member'; currentName = rec.name || u;
+  $('loginScreen').classList.add('hidden');
+  $('headerUser').textContent = currentName + ' • ' + (rec.mid||'');
+  $('profMid').textContent = 'ID MEMBER: ' + (rec.mid||'—');
+  applyRolePermissions();
+  renderAll();
+  loadProfile(); renderSP(); renderSPLog();
+  if(announce) showToast(currentRole==='admin' ? '👑 Login sebagai ADMIN — akses penuh' : '👤 Login sebagai MEMBER — akses terbatas', currentRole);
+}
+function showToast(msg,cls){
+  var t = $('toast'); t.textContent = msg; t.className = 'toast '+cls+' show';
+  clearTimeout(showToast.h); showToast.h = setTimeout(function(){ t.classList.remove('show'); },3500);
+}
+function doLogin(){
+  var u = $('loginUser').value.trim().toLowerCase(), p = $('loginPass').value.trim();
+  if(has(S.users,u) && S.users[u].password===p){
+    var r = S.users[u];
+    rset('nfnc_user',u); rset('nfnc_role',r.role); rset('nfnc_name',r.name||u);
+    startSession(u,true);
+    showLayer('home');
+  } else {
+    $('loginError').textContent = 'USERNAME ATAU PASSWORD SALAH';
+    ['loginUser','loginPass'].forEach(function(id){ var el=$(id); el.classList.remove('error'); void el.offsetWidth; el.classList.add('error'); });
+    setTimeout(function(){ $('loginError').textContent=''; $('loginUser').classList.remove('error'); $('loginPass').classList.remove('error'); },2000);
+  }
+}
+function doLogout(){ ['nfnc_user','nfnc_role','nfnc_name'].forEach(rdel); location.reload(); }
+
+function applyRolePermissions(){
+  var adm = currentRole==='admin';
+  document.body.classList.toggle('is-admin', adm);
+  document.body.classList.toggle('is-member', !adm);
+  var label = adm ? '👑 ADMIN' : '👤 MEMBER', cls = 'role-badge ' + (adm?'admin':'member');
+  ['headerRole','profRole'].forEach(function(id){ $(id).textContent=label; $(id).className=cls; });
+  $('greet').className = 'greet ' + (adm?'admin':'member');
+  $('greet').textContent = 'Selamat datang, ' + currentName + '!';
+  $('profName').textContent = currentName;
+  if(!adm && $('adminPanel').classList.contains('active')) showLayer('home');
+}
+
+function showLayer(id){
+  if(id==='adminPanel' && currentRole!=='admin'){ alert('⛔ Akses ditolak. Menu ini hanya untuk Admin.'); showLayer('home'); return; }
+  var t = $(id); if(!t || !t.classList.contains('layer')) return;
+  document.querySelectorAll('.layer').forEach(function(l){ l.classList.remove('active'); });
+  t.classList.add('active');
+  document.querySelectorAll('nav a').forEach(function(a){ a.classList.toggle('active', a.getAttribute('data-layer')===id); });
+  if(id==='profile'){ loadProfile(); animateRating(); renderSP(); renderSPLog(); }
+  if(id==='adminPanel') renderAdminDashboard();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- render ---------- */
+function eb(fn,id){ return '<button class="edit-btn admin-only" onclick="'+fn+'('+id+')">✏️ EDIT</button>'; }
+function renderMembers(){
+  $('memberGrid').innerHTML = S.members.map(function(m){
+    return '<div class="card member-card">'+eb('editMember',m.id)+'<div class="member-img">👤</div><div class="rank-badge">'+esc(m.rank)+'</div><h3 class="member-name">'+esc(m.name)+'</h3><p class="member-role">'+esc(m.role)+'</p><p class="member-id"><span class="'+(m.online==='online'?'status-online':'status-offline')+'"></span>ID: '+esc(m.gid)+'</p></div>';
+  }).join('');
+}
+function renderGames(){
+  $('gameGrid').innerHTML = S.games.map(function(g){
+    return '<div class="game-card">'+eb('editGame',g.id)+'<div class="game-icon">'+esc(g.icon)+'</div><div class="game-name">'+esc(g.name)+'</div><div class="game-div">'+esc(g.div)+'</div></div>';
+  }).join('');
+}
+function renderRekor(){
+  $('timeline').innerHTML = S.rekor.map(function(r){
+    var b = RANKS[r.rank] || RANKS['1'];
+    return '<div class="tl-item"><div class="tl-card">'+eb('editRekor',r.id)+'<div class="tl-date">📅 '+esc(r.date)+'</div><h4 class="tl-title">'+esc(r.title)+'</h4><p class="tl-desc">'+esc(r.desc)+'</p><span class="tl-badge '+b[1]+'">'+b[0]+'</span></div></div>';
+  }).join('');
+}
+function renderApparel(){
+  $('apparelGrid').innerHTML = S.apparel.map(function(a){
+    return '<div class="apparel-card">'+eb('editApparel',a.id)+'<div class="apparel-img">[ '+esc(a.label)+' PHOTO ]</div><h3 class="apparel-name">'+esc(a.name)+'</h3><p class="apparel-price">'+esc(a.price)+'</p><button class="btn-small" data-n="'+esc(a.name)+'" onclick="orderApparel(this.dataset.n)">ORDER NOW</button></div>';
+  }).join('');
+}
+function renderRules(){
+  $('rulesList').innerHTML = S.rules.map(function(r,i){
+    return '<div class="rule-item">'+eb('editRule',r.id)+'<div class="rule-no">'+('0'+(i+1)).slice(-2)+'</div><div><h4>'+esc(r.title)+'</h4><p>'+esc(r.desc)+'</p></div></div>';
+  }).join('') || '<p class="section-sub">Belum ada rule.</p>';
+}
+function adminTable(head,rows){
+  return '<table><thead><tr><th>No</th>'+head.map(function(h){return '<th>'+h+'</th>';}).join('')+'<th>Aksi</th></tr></thead><tbody>'+
+    (rows.length ? rows.join('') : '<tr><td colspan="'+(head.length+2)+'" style="color:#a0a0a0">Belum ada data.</td></tr>')+'</tbody></table>';
+}
+function renderAdminTables(){
+  ['members','rekor','games','rules'].forEach(function(k){
+    var c = ENT[k];
+    $('tbl-'+k).innerHTML = adminTable(c.cols.map(function(x){return x[0];}), S[k].map(function(it,i){
+      return '<tr><td>'+(i+1)+'</td>'+c.cols.map(function(x){return '<td>'+esc(x[1](it))+'</td>';}).join('')+
+        '<td><button class="btn-small sm" onclick="'+c.fe+'('+it.id+')">✏️ EDIT</button><button class="btn-small sm del" onclick="'+c.fd+'('+it.id+')">🗑️ HAPUS</button></td></tr>';
+    }));
+  });
+  $('tbl-users').innerHTML = adminTable(['Username','ID Member','Role','Nama'], Object.keys(S.users).map(function(u,i){
+    var r = S.users[u], self = u===currentUser;
+    return '<tr><td>'+(i+1)+'</td><td>'+esc(u)+(self?' (Anda)':'')+'</td><td>'+esc(r.mid||'')+'</td><td>'+(r.role==='admin'?'👑 admin':'👤 member')+'</td><td>'+esc(r.name)+'</td><td><button class="btn-small sm" onclick="editUser(\''+esc(u)+'\')">✏️ EDIT</button>'+(self?'':'<button class="btn-small sm del" onclick="deleteUser(\''+esc(u)+'\')">🗑️ HAPUS</button>')+'</td></tr>';
+  }));
+}
+function renderAdminDashboard(){
+  var items = [[S.members.length,'Total Members'],[Object.keys(S.users).length,'Total Users'],[S.rekor.length,'Total Rekor'],[S.games.length,'Total Games'],[S.rules.length,'Total Rules']];
+  $('adminStats').innerHTML = items.map(function(x){ return '<div class="stat-box"><div class="stat-num" style="color:var(--admin-color)">'+x[0]+'</div><div class="stat-label">'+x[1]+'</div></div>'; }).join('');
+  renderAdminTables();
+}
+function renderAll(){ renderMembers(); renderGames(); renderRekor(); renderApparel(); renderRules(); renderAdminDashboard(); }
+function renderAdmin(){ renderAdminDashboard(); }
+function switchAdminTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab')===tab); });
+  document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.toggle('active', p.id==='tab-'+tab); });
+}
+function buildStatic(){
+  $('recGrid').innerHTML = RECORDS.map(function(r){
+    var rows=[["Total Match",r[1]],["Kemenangan",r[2]],["Kekalahan",r[3]],["Win Rate",r[4]],["Juara 1",r[5]]];
+    return '<div class="rec-card"><h3>'+r[0]+'</h3>'+rows.map(function(x){return '<div class="data-row"><span>'+x[0]+'</span><span>'+x[1]+'</span></div>';}).join('')+'</div>';
+  }).join('');
+  $('ratingList').innerHTML = RATINGS.map(function(r){
+    var cls = r[1]>90 ? ' gold' : (r[1]<50 ? ' danger' : '');
+    return '<div class="rate-bar-container"><div class="rate-label"><span>'+r[0]+'</span><span>'+r[1]+'%</span></div><div class="rate-bar"><div class="rate-fill'+cls+'" data-value="'+r[1]+'" style="width:0%"></div></div></div>';
+  }).join('');
+}
+
+/* ---------- modal + CRUD (admin) ---------- */
+function showModal(title,content,onSave){
+  $('modalTitle').textContent = title; $('modalBody').innerHTML = content; modalSave = onSave;
+  $('modal').classList.add('open');
+}
+function closeModal(){ $('modal').classList.remove('open'); modalSave = null; }
+function modalSubmit(){ if(modalSave && modalSave()===false) return; closeModal(); }
+function fld(l,id,t,v,o,dis){
+  v = v==null ? '' : v;
+  var h = '<label class="flabel" for="'+id+'">'+l+'</label>';
+  if(t==='select') return h+'<select id="'+id+'">'+o.map(function(x){return '<option'+(String(x)===String(v)?' selected':'')+'>'+esc(x)+'</option>';}).join('')+'</select>';
+  if(t==='textarea') return h+'<textarea id="'+id+'">'+esc(v)+'</textarea>';
+  return h+'<input type="text" id="'+id+'" value="'+esc(v)+'"'+(dis?' disabled':'')+'>';
+}
+function openForm(ent,id){
+  if(!guard()) return;
+  var c = ENT[ent], it = id ? S[ent].filter(function(x){return x.id===id;})[0] : {};
+  if(id && !it) return;
+  showModal((id?'EDIT ':'TAMBAH ')+c.label.toUpperCase(), c.fields.map(function(f){ return fld(f[1],'f_'+f[0],f[2],it[f[0]],f[3]); }).join(''), function(){ return saveEntity(ent,id); });
+}
+function addEntity(ent){ openForm(ent,null); }
+function saveEntity(ent,id){
+  if(!guard()) return false;
+  var c = ENT[ent], o = {};
+  c.fields.forEach(function(f){ o[f[0]] = $('f_'+f[0]).value.trim(); });
+  if(!o[c.fields[0][0]]){ alert('Field "'+c.fields[0][1]+'" wajib diisi.'); return false; }
+  if(id){ var it = S[ent].filter(function(x){return x.id===id;})[0]; if(it) Object.assign(it,o); }
+  else { o.id = nextId(S[ent]); S[ent].push(o); }
+  persist(ent); renderAll();
+}
+function removeEntity(ent,id,msg){
+  if(!guard()) return;
+  if(!confirm(msg)) return;
+  S[ent] = S[ent].filter(function(x){return x.id!==id;});
+  persist(ent); renderAll();
+}
+function editMember(id){ openForm('members',id); }
+function saveMember(id){ return saveEntity('members',id); }
+function deleteMember(id){ removeEntity('members',id,'Hapus member ini?'); }
+function editRekor(id){ openForm('rekor',id); }
+function deleteRekor(id){ removeEntity('rekor',id,'Hapus rekor ini?'); }
+function editGame(id){ openForm('games',id); }
+function deleteGame(id){ removeEntity('games',id,'Hapus game ini?'); }
+function editApparel(id){ openForm('apparel',id); }
+
+function editRule(id){ openForm('rules',id); }
+function deleteRule(id){ removeEntity('rules',id,'Hapus rule ini?'); }
+function dataRows(rows){ return rows.map(function(x){ return '<div class="data-row"><span>'+x[0]+'</span><span>'+(x[1]?esc(x[1]):'—')+'</span></div>'; }).join(''); }
+function searchMember(){
+  var out = $('searchResult'), raw = $('searchId').value.trim().toUpperCase();
+  if(!raw){ out.innerHTML = ''; return; }
+  var q = (/^\d{1,4}$/.test(raw)) ? 'NFNC-'+('0000'+raw).slice(-4) : raw;
+  var uname = Object.keys(S.users).filter(function(k){ return String(S.users[k].mid).toUpperCase()===q; })[0];
+  if(uname){
+    var r = S.users[uname], d = jget('nfnc_profile_'+uname) || {};
+    var rows = [['Nickname',d.pNick],['Game Utama',d.pGame],['Role',d.pRole],['ID Game',d.pId],['Bio',d.pBio]];
+    if(currentRole==='admin') rows = rows.concat([['Nama Lengkap',d.pNama],['Umur',d.pUmur],['No. WhatsApp',d.pWa],['Alamat',d.pAlamat]]);
+    var isA = r.role==='admin';
+    out.innerHTML = '<div class="result-card"><div class="member-img" style="margin:0 auto 12px">👤</div><span class="mid-tag">'+esc(r.mid)+'</span><h3 class="member-name">'+esc(r.name)+'</h3><span class="role-badge '+(isA?'admin':'member')+'">'+(isA?'👑 ADMIN':'👤 MEMBER')+'</span><div style="margin-top:18px">'+dataRows(rows)+'</div></div>';
+    return;
+  }
+  var m = S.members.filter(function(x){ return String(x.gid).toUpperCase()===q; })[0];
+  if(m){
+    out.innerHTML = '<div class="result-card"><div class="member-img" style="margin:0 auto 12px">👤</div><div class="rank-badge">'+esc(m.rank)+'</div><h3 class="member-name">'+esc(m.name)+'</h3><div style="margin-top:12px">'+dataRows([['ID Game',m.gid],['Role',m.role],['Status',m.online]])+'</div></div>';
+  } else {
+    out.innerHTML = '<p class="result-empty">ID tidak ditemukan</p>';
+  }
+}
+function userForm(u,rec){
+  return fld('Username','f_username','text',u,null,!!u)+fld(u?'Password (kosongkan jika tidak diubah)':'Password','f_password','text','')+fld('Role','f_role','select',rec.role||'member',['member','admin'])+fld('Nama','f_name','text',rec.name||'');
+}
+function saveUser(orig){
+  if(!guard()) return false;
+  var u = orig || $('f_username').value.trim().toLowerCase(), pw = $('f_password').value.trim(), role = $('f_role').value, name = $('f_name').value.trim();
+  if(!/^[a-z0-9_.-]+$/.test(u)){ alert('Username hanya boleh huruf, angka, titik, strip, dan underscore.'); return false; }
+  if(!orig && has(S.users,u)){ alert('Username sudah dipakai.'); return false; }
+  if(!orig && !pw){ alert('Password wajib diisi.'); return false; }
+  if(orig && orig===currentUser && role!=='admin'){ alert('Tidak bisa menurunkan role diri sendiri!'); return false; }
+  S.users[u] = { password: pw || (S.users[u] && S.users[u].password), role: role, name: name || u, mid: (S.users[u] && S.users[u].mid) || genMid() };
+  persist('users'); renderAll();
+}
+function addUser(){ if(!guard()) return; showModal('TAMBAH USER', userForm('',{}), function(){ return saveUser(''); }); }
+function editUser(u){
+  if(!guard() || !has(S.users,u)) return;
+  showModal('EDIT USER', userForm(u,S.users[u]), function(){ return saveUser(u); });
+}
+function deleteUser(u){
+  if(!guard()) return;
+  if(u===currentUser){ alert('Tidak bisa hapus diri sendiri!'); return; }
+  if(!has(S.users,u) || !confirm('Hapus user "'+u+'"?')) return;
+  delete S.users[u]; persist('users'); renderAll();
+}
+
+/* ---------- profile ---------- */
+function profileKey(){ return 'nfnc_profile_'+currentUser; }
+function loadProfile(){
+  var d = jget(profileKey()) || {};
+  FIELDS.forEach(function(f){ $(f[0]).value = d[f[0]] || ''; });
+  $('dataDisplay').innerHTML = FIELDS.map(function(f){ var v=d[f[0]]; return '<div class="data-row"><span>'+f[1]+'</span><span>'+(v?esc(v):'—')+'</span></div>'; }).join('');
+}
+function saveProfile(){
+  var d = {}; FIELDS.forEach(function(f){ d[f[0]] = $(f[0]).value.trim(); });
+  jset(profileKey(), d);
+  alert('✅ Data berhasil disimpan!');
+  loadProfile();
+}
+function animateRating(){
+  var fills = document.querySelectorAll('.rate-fill');
+  fills.forEach(function(f){ f.style.width='0%'; });
+  setTimeout(function(){ fills.forEach(function(f){ f.style.width = f.getAttribute('data-value')+'%'; }); },100);
+}
+function getSP(){ var n = parseInt(rget('nfnc_sp_'+currentUser),10); return isNaN(n)?0:n; }
+function getLog(){ var a = jget('nfnc_splog_'+currentUser); return Array.isArray(a)?a:[]; }
+function addSP(amount){
+  var n = Math.min(1000, Math.max(0, getSP()+amount));
+  rset('nfnc_sp_'+currentUser, String(n));
+  var el=$('spNumber'); el.textContent=n; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+  logSPActivity((amount>0?'+':'')+amount+' SP — '+(amount>0?'Reward aktivitas':'Pengurangan poin'), amount>0);
+}
+function renderSP(){ $('spNumber').textContent = getSP(); }
+function logSPActivity(text,plus){
+  var now = new Date(), t = ('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+  var log = getLog(); log.unshift({text:text+' — '+t, plus:plus});
+  jset('nfnc_splog_'+currentUser, log.slice(0,20)); renderSPLog();
+}
+function renderSPLog(){
+  var log = getLog();
+  $('spLog').innerHTML = log.length ? log.map(function(e){ return '<div class="'+(e.plus?'plus':'minus')+'">'+esc(e.text)+'</div>'; }).join('') : '<div style="color:#a0a0a0">Belum ada aktivitas.</div>';
+}
+function orderApparel(name){ alert('🛒 Terima kasih! Pesanan '+name+' akan diproses.'); }
+function submitRecruit(e){
+  e.preventDefault();
+  alert('✅ Pendaftaran berhasil dikirim!\n\nAdmin NFNC akan menghubungi Anda dalam 1x24 jam.');
+  $('recruitForm').reset();
+}
+
+function initApp(){
+  buildStatic();
+  initData();
+  var u = rget('nfnc_user');
+  if(u && has(S.users,u)){
+    startSession(u);
+    rset('nfnc_role',S.users[u].role); rset('nfnc_name',S.users[u].name||u);
+  } else {
+    ['nfnc_user','nfnc_role','nfnc_name'].forEach(rdel);
+    $('loginScreen').classList.remove('hidden');
+    renderAll();
+  }
+}
+window.addEventListener('load', initApp);
+['loginUser','loginPass'].forEach(function(id){ $(id).addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); }); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+$('searchId').addEventListener('keydown', function(e){ if(e.key==='Enter') searchMember(); });
+</script>
+</body>
+</html>

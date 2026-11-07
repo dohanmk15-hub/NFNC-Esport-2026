@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>NFNC Esports</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMwNTA1MDUiLz48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjUiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjMyIiB5PSI0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ik9yYml0cm9uLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiNmZmYiPk5GTkM8L3RleHQ+PC9zdmc+Cg==">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--card:#111;--gold:#ffd700;--silver:#c0c0c0;--bronze:#cd7f32;--danger:#ff3333;--ok:#00ff88;--acc:#00e5ff;--adm:#ff00ff;--sec:#a0a0a0;--glow:0 0 10px rgba(255,255,255,.8),0 0 20px rgba(255,255,255,.4);--bd:1px solid rgba(255,255,255,.2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:#fff;font:16px/1.5 'Rajdhani',sans-serif;letter-spacing:1.5px;min-height:100vh;overflow-x:hidden;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px;background-attachment:fixed}
+img,video{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:'Orbitron',sans-serif;text-transform:uppercase;letter-spacing:2px;word-break:break-word}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes pulseGlow{0%,100%{text-shadow:0 0 6px rgba(255,255,255,.4)}50%{text-shadow:0 0 14px #fff,0 0 30px rgba(255,255,255,.6)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:14px;padding:10px 4%;padding-top:calc(10px + env(safe-area-inset-top,0px));background:rgba(5,5,5,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:var(--bd)}
+.logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.5rem;text-shadow:var(--glow)}
+nav{flex:1;min-width:0}
+nav ul{display:flex;gap:16px;list-style:none;justify-content:center;flex-wrap:wrap}
+nav a{display:block;color:var(--sec);text-transform:uppercase;font-size:.8rem;font-weight:700;padding:8px 2px;border-bottom:2px solid transparent;transition:.3s}
+nav a:hover,nav a.active{color:#fff;border-bottom-color:#fff}
+nav a.adm{color:var(--adm)}nav a.adm.active{border-bottom-color:var(--adm)}
+.auth{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.who{font-weight:700;font-size:.85rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.burger{display:none;background:none;border:var(--bd);color:#fff;font-size:1.4rem;width:44px;height:44px;cursor:pointer}
+main{max-width:1250px;margin:0 auto;padding:110px 5% 50px;min-height:80vh;animation:fadeIn .6s}
+footer{text-align:center;padding:36px 5%;border-top:1px solid rgba(160,160,160,.2);color:var(--sec);font-size:.85rem;text-transform:uppercase}
+footer small{display:block;font-size:.7rem;margin-top:4px}
+/* basics */
+.title{text-align:center;font-size:2.2rem;text-shadow:var(--glow)}
+.sub{text-align:center;color:var(--sec);text-transform:uppercase;letter-spacing:4px;margin:6px 0 34px}
+.sec{text-align:center;margin:44px 0 20px;font-size:1.2rem}
+.sec2{margin:26px 0 12px;font-size:1rem}
+.muted{color:var(--sec)}.center{text-align:center}.err{color:var(--danger);text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--card);border:var(--bd);padding:22px;transition:.3s;min-width:0}
+.card:hover{border-color:#fff;box-shadow:var(--glow);transform:translateY(-5px)}
+.card h3{font-size:1rem;margin:8px 0 4px}
+.ico{font-size:2.4rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 22px;background:transparent;border:2px solid #fff;color:#fff;font:700 .8rem 'Orbitron',sans-serif;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.3s;text-align:center}
+.btn:hover{background:#fff;color:#000;box-shadow:var(--glow)}
+.btn:disabled{opacity:.5;cursor:wait}
+.btn.sm{min-height:36px;padding:4px 12px;font-size:.7rem;border-width:1px}
+.btn.ghost{border-color:rgba(255,255,255,.4)}
+.btn.danger{border-color:var(--danger);color:var(--danger)}.btn.danger:hover{background:var(--danger);color:#fff;box-shadow:none}
+.btn.okb{border-color:var(--ok);color:var(--ok)}.btn.okb:hover{background:var(--ok);color:#000;box-shadow:none}
+.btn.full{width:100%;margin-top:6px}
+.btn.off{opacity:.4;pointer-events:none;border-color:#555}
+.btn.shopee{border-color:#ee4d2d;color:#ee4d2d}.btn.shopee:hover{background:#ee4d2d;color:#fff;box-shadow:none}
+.btn.toped{border-color:#42b549;color:#42b549}.btn.toped:hover{background:#42b549;color:#fff;box-shadow:none}
+.badge{display:inline-block;padding:2px 10px;border:1px solid var(--sec);font-size:.7rem;font-weight:700;text-transform:uppercase;border-radius:3px;white-space:nowrap}
+.badge.adm{color:var(--adm);border-color:var(--adm)}.badge.mem{color:var(--acc);border-color:var(--acc)}
+.badge.gold,.badge.r1{color:var(--gold);border-color:var(--gold)}.badge.r2{color:var(--silver);border-color:var(--silver)}.badge.r3{color:var(--bronze);border-color:var(--bronze)}
+.badge.ok{color:var(--ok);border-color:var(--ok)}.badge.off{color:var(--danger);border-color:var(--danger)}.badge.warn{color:var(--gold);border-color:var(--gold)}
+/* home */
+.hero{min-height:56vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.hero-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(3rem,13vw,7rem);letter-spacing:.12em;text-shadow:var(--glow);animation:pulseGlow 3s infinite}
+.est{font-family:'Orbitron',sans-serif;color:var(--gold);letter-spacing:6px;text-shadow:0 0 10px rgba(255,215,0,.5)}
+.tag{font-size:clamp(.9rem,3.5vw,1.2rem);letter-spacing:5px;text-transform:uppercase;color:var(--sec)}
+.about{max-width:620px;color:#ddd}
+.notice{border:1px dashed var(--gold);color:var(--gold);padding:10px 16px;max-width:640px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:14px 0 6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-top:34px}
+.stat{text-align:center;padding:20px}.stat b{display:block;font:900 2.1rem 'Orbitron',sans-serif}.stat span{color:var(--sec);text-transform:uppercase;font-size:.8rem}
+.stats.gold .stat{border-color:rgba(255,215,0,.3)}.stats.gold b{color:var(--gold);text-shadow:0 0 12px rgba(255,215,0,.6)}
+/* timeline */
+.tl{max-width:760px;margin:0 auto;border-left:2px solid rgba(255,255,255,.4);padding-left:26px}
+.tl .card{position:relative;margin-bottom:18px}
+.tl .card::before{content:'';position:absolute;left:-34px;top:26px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:var(--glow)}
+/* members */
+.av{width:84px;height:84px;border-radius:50%;border:2px solid #fff;object-fit:cover;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:0 auto 10px;flex-shrink:0}
+.av.xl{width:120px;height:120px;font-size:3.4rem;margin:0;box-shadow:var(--glow)}
+.mc{text-align:center;cursor:pointer}
+.tid{font:700 .8rem 'Orbitron',sans-serif;color:var(--acc)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.bar input,.bar select{flex:1;min-width:150px;margin:0}
+/* forms */
+input,select,textarea{width:100%;background:#0a0a0a;border:1px solid #333;color:#fff;padding:12px 14px;min-height:44px;font:1rem 'Rajdhani',sans-serif;letter-spacing:1px;margin-bottom:12px;border-radius:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#fff;box-shadow:0 0 8px rgba(255,255,255,.4)}
+select option{background:#111}textarea{min-height:100px;resize:vertical}
+input[type=file]{padding:8px;margin-bottom:0}
+.fl{display:block;color:var(--sec);text-transform:uppercase;font-size:.8rem;margin-bottom:5px}
+.fbox{max-width:600px;margin:26px auto 0;background:var(--card);border:var(--bd);padding:30px}
+.fbox h3{margin-bottom:14px}
+.up{margin-bottom:12px;display:flex;flex-direction:column;gap:8px}.up.busy{opacity:.5}
+.prev img,.prev video{max-height:140px;border:var(--bd)}
+/* tables */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--card);border:var(--bd)}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:10px 12px;border-bottom:1px dashed rgba(255,255,255,.15);text-align:left;font-size:.9rem;vertical-align:middle}
+th{color:var(--sec);text-transform:uppercase;font-size:.72rem;white-space:nowrap}
+td .btn{margin:2px 3px 2px 0}
+.th{width:44px;height:44px;object-fit:cover;border-radius:50%}
+.acts{white-space:nowrap}
+/* admin */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:22px;-webkit-overflow-scrolling:touch}
+.tab{flex-shrink:0;min-height:44px;padding:8px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--sec);font:700 .85rem 'Rajdhani',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.3s}
+.tab:hover{color:#fff;border-color:#fff}.tab.on{color:#fff;border-color:var(--adm);box-shadow:0 0 12px rgba(255,0,255,.5)}
+.list{list-style:none}.list li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+.plus{color:var(--ok)}.minus{color:var(--danger)}
+/* profile */
+.prof{max-width:900px;margin:0 auto;background:var(--card);border:2px solid var(--acc);box-shadow:0 0 18px rgba(0,229,255,.25);padding:26px}
+.prof.is-admin{border-color:var(--adm);box-shadow:0 0 22px rgba(255,0,255,.4);background:linear-gradient(160deg,#1a0a1a,#111 60%)}
+.ph{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.ph h2{font-size:1.6rem;margin:4px 0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:22px}
+.info div{border:var(--bd);padding:12px;text-align:center}.info b{display:block;font:700 1.2rem 'Orbitron',sans-serif;word-break:break-word}.info span{color:var(--sec);font-size:.75rem}
+.rights{margin-top:22px;border:1px dashed var(--adm);padding:14px}.rights h3{font-size:.9rem;color:var(--adm);margin-bottom:8px}.rights ul{list-style:none}
+/* docs + apparel */
+.docs{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.doc img,.doc video{width:100%;aspect-ratio:16/10;object-fit:cover;background:#000;cursor:zoom-in}.doc video{cursor:default}
+.pimg{aspect-ratio:1;background:linear-gradient(135deg,#1a1a1a,#0a0a0a);border:1px dashed #444;display:flex;align-items:center;justify-content:center;color:var(--sec);overflow:hidden;margin-bottom:10px}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.price{color:var(--gold);font-weight:700;font-size:1.1rem}
+.btns{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+/* modal + toast */
+.mbg{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.82);display:none;align-items:flex-start;justify-content:center;padding:4vh 12px;overflow-y:auto}
+.mbg.open{display:flex}
+.mbox{width:100%;max-width:560px;background:#0a0a0a;border:2px solid #fff;box-shadow:var(--glow);padding:22px;margin:auto 0}
+.mhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.mhead h3{font-size:1.05rem}
+.x{background:none;border:var(--bd);color:#fff;width:40px;height:40px;cursor:pointer;font-size:1rem;flex-shrink:0}
+.zoom{max-height:75vh;margin:0 auto;object-fit:contain}
+.cred{border:1px dashed var(--ok);padding:12px;margin:10px 0;word-break:break-all;font-family:monospace}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);z-index:400;max-width:92%;background:#0a0a0a;border:2px solid var(--ok);color:var(--ok);padding:12px 22px;font-weight:700;opacity:0;pointer-events:none;transition:.35s;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}.toast.bad{border-color:var(--danger);color:var(--danger)}
+/* responsive */
+@media(max-width:1020px){
+.burger{display:block}
+.auth{order:2;margin-left:auto}.logo{order:0}.burger{order:3}
+nav{position:fixed;top:0;left:0;right:0;transform:translateY(-120%);transition:transform .3s;background:#050505;padding:78px 6% 20px;border-bottom:var(--bd);z-index:-1;max-height:100vh;overflow-y:auto}
+nav.open{transform:none}
+nav ul{flex-direction:column;gap:0;align-items:stretch}
+nav a{padding:14px 4px;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.1)}
+}
+@media(max-width:600px){
+main{padding:96px 4% 40px}
+.title{font-size:1.5rem}.sub{letter-spacing:2px}
+.who{display:none}.card{padding:16px}
+.grid,.docs{grid-template-columns:1fr}
+.ph{flex-direction:column;text-align:center}.badges{justify-content:center}
+.fbox{padding:20px 16px}.mbox{padding:16px}
+.btn{width:100%}.btn.sm,td .btn,.cta .btn{width:auto}.cta .btn{flex:1}
+}
+.badges.c{justify-content:center}
+.mt{margin-top:14px}
+.lnk{color:var(--acc);text-decoration:underline}
+
+.rules{display:grid;gap:14px;max-width:820px;margin:0 auto}
+.rule{display:flex;gap:18px;align-items:flex-start}.rule h3{margin:0 0 4px}.rn{font:900 1.4rem 'Orbitron',sans-serif;color:var(--gold);min-width:38px}
+.rb{margin-bottom:14px}.rl{display:flex;justify-content:space-between;gap:10px;text-transform:uppercase;font-size:.85rem;margin-bottom:5px}
+.rbar{height:14px;background:#0a0a0a;border:1px solid #333;border-radius:10px;overflow:hidden}
+.rf{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--acc),var(--ok))}.rf.gold{background:linear-gradient(90deg,#b8860b,var(--gold))}.rf.danger{background:linear-gradient(90deg,#800,var(--danger))}
+.drow{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+.drow span:first-child{color:var(--sec);text-transform:uppercase;font-size:.85rem;flex-shrink:0}.drow span:last-child{text-align:right;overflow-wrap:anywhere}
+.srow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}.srow.c{justify-content:center}
+.qrw{display:flex;justify-content:center;margin:14px 0 8px}.qrw canvas{background:#fff;width:280px;max-width:100%;height:auto;image-rendering:pixelated}
+.warn{color:var(--gold);font-size:.85rem;margin-bottom:14px}
+canvas{max-width:100%}.card,.fbox,.prof,.mbox{overflow-wrap:anywhere}
+@media(max-width:420px){.auth .badge{display:none}.logo{font-size:1.2rem}header{gap:8px}.rule{gap:12px}.prof{padding:16px}.drow{flex-direction:column;gap:2px}.drow span:last-child{text-align:left}}
+@media(pointer:coarse){.btn.sm,td .btn,.tab,nav a{min-height:44px}.x{width:44px;height:44px}}
+
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#/home">NFNC</a>
+  <nav id="nav" aria-label="Menu utama"></nav>
+  <div id="auth" class="auth"></div>
+  <button class="burger" id="burger" data-act="burger" aria-label="Buka menu">☰</button>
+</header>
+<main id="view"><p class="muted center">Memuat…</p></main>
+<footer>© NFNC ESPORTS. ALL RIGHTS RESERVED.<small>Never Forget Never Compromise</small></footer>
+<div id="modal" class="mbg" role="dialog" aria-modal="true">
+  <div class="mbox">
+    <div class="mhead"><h3 id="mTitle"></h3><button class="x" data-act="close" aria-label="Tutup">✕</button></div>
+    <div id="mBody"></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+<script>
+'use strict';
+/* =====================================================================
+   MESIN DATA LOKAL — pengganti server.js + SQLite untuk versi satu file.
+   Data disimpan permanen di IndexedDB browser (bukan LocalStorage).
+   Password di-hash PBKDF2-SHA256 + salt (Web Crypto). Aturan hak akses,
+   validasi, keunikan ID, log aktivitas, dan Point sama seperti server asli.
+   ===================================================================== */
+const Engine = (() => {
+  const IDB_NAME = 'nfnc-esports', IDB_STORE = 'kv', KEY = 'db';
+  const SESSION_MS = 365 * 864e5;
+  let DB = null, persistOk = true;
+  const hits = new Map();
+
+  class HttpErr extends Error { constructor(code, msg) { super(msg); this.code = code; } }
+  const fail = (c, m) => { throw new HttpErr(c, m); };
+
+  /* ---------- penyimpanan IndexedDB ---------- */
+  const idbOpen = () => new Promise((ok, no) => {
+    const r = indexedDB.open(IDB_NAME, 1);
+    r.onupgradeneeded = () => r.result.createObjectStore(IDB_STORE);
+    r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error);
+  });
+  const idbGet = async () => { const d = await idbOpen(); return new Promise((ok, no) => { const q = d.transaction(IDB_STORE).objectStore(IDB_STORE).get(KEY); q.onsuccess = () => ok(q.result); q.onerror = () => no(q.error); }); };
+  const idbPut = async v => { const d = await idbOpen(); return new Promise((ok, no) => { const t = d.transaction(IDB_STORE, 'readwrite'); t.objectStore(IDB_STORE).put(v, KEY); t.oncomplete = () => ok(); t.onerror = () => no(t.error); }); };
+  let saveQ = Promise.resolve();
+  const save = () => { if (!persistOk) return saveQ; const snap = JSON.parse(JSON.stringify(DB)); saveQ = saveQ.then(() => idbPut(snap)).catch(() => { persistOk = false; window.dispatchEvent(new Event('nfnc-nopersist')); }); return saveQ; };
+
+  /* ---------- util ---------- */
+  const today = () => new Date().toISOString().slice(0, 10), nowIso = () => new Date().toISOString();
+  const nid = t => (DB.seq[t] = (DB.seq[t] || 0) + 1);
+  const hex = u8 => [...u8].map(b => b.toString(16).padStart(2, '0')).join('');
+  const unhex = s => new Uint8Array((s.match(/../g) || []).map(h => parseInt(h, 16)));
+  const pbk = async (pw, salt) => new Uint8Array(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: 150000 }, await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveBits']), 256));
+  const hash = async pw => { const s = crypto.getRandomValues(new Uint8Array(16)); return `pbkdf2$${hex(s)}$${hex(await pbk(pw, s))}`; };
+  const verify = async (pw, h) => { const [a, s, x] = String(h).split('$'); if (a !== 'pbkdf2' || !s || !x) return false; const y = hex(await pbk(pw, unhex(s))); let d = y.length ^ x.length; for (let i = 0; i < y.length; i++) d |= y.charCodeAt(i) ^ (x.charCodeAt(i) || 0); return d === 0; };
+  const rl = (key, max, win, add) => { const n = Date.now(), a = (hits.get(key) || []).filter(t => n - t < win); if (add) a.push(n); hits.set(key, a); return a.length > max; };
+
+  /* ---------- data awal ---------- */
+  const SETTING_DEFAULTS = { tagline: 'Never Forget Never Compromise', about: 'NFNC adalah komunitas gaming dengan sistem keanggotaan digital resmi.', foundedYear: '2022', announcement: '', shopeeUrl: '', tokopediaUrl: '', shareUrl: '' };
+  const RATING_NAMES = ['Skill Rating', 'Teamwork', 'Communication', 'Discipline', 'Overall Performance'];
+  const seedRules = d => { d.rules = []; [['Hormati sesama anggota', 'Dilarang menghina, toxic, atau merendahkan sesama anggota maupun lawan.'], ['Ikuti latihan terjadwal', 'Wajib hadir saat scrim dan latihan. Jika berhalangan, izin ke admin minimal 1 jam sebelumnya.'], ['Dilarang curang', 'Cheat, hack, mod, dan joki akun dilarang keras di semua divisi.'], ['Komunikasi aktif', 'Gunakan voice dan chat tim dengan sopan, singkat, dan jelas saat bertanding.'], ['Jaga nama baik NFNC', 'Bersikap baik di dalam dan di luar game, termasuk di media sosial.'], ['Ikuti keputusan strategi', 'Keputusan draft dan strategi mengikuti Leader atau IGL saat pertandingan.'], ['Sanksi pelanggaran', 'Pelanggaran diproses bertahap: peringatan, pengurangan Point, lalu dikeluarkan dari tim.']].forEach(r => d.rules.push({ id: nid('rules'), title: r[0], desc: r[1] })); };
+  const norm = () => { const mig = o => { if (!o.email) { const u = String(o['user' + 'name'] || ''); o.email = (u.includes('@') ? u : (u || 'anggota' + o.id) + '@nfnc.local').toLowerCase(); delete o['user' + 'name']; } }; DB.members.forEach(mig); DB.recruits.forEach(mig); if (!Array.isArray(DB.rules)) seedRules(DB); DB.settings = { ...SETTING_DEFAULTS, ...DB.settings }; DB.members.forEach(m => { if (!m.profile) m.profile = {}; if (!Array.isArray(m.ratings) || m.ratings.length !== 5) m.ratings = [0, 0, 0, 0, 0]; }); };
+  const fresh = () => {
+    const d = { v: 1, seq: {}, settings: { ...SETTING_DEFAULTS }, jabatan: [], members: [], recruits: [], orgRecords: [], memberRecords: [], apparel: [], docs: [], points: [], log: [], session: null };
+    DB = d;
+    ['Founder', 'Co-Founder', 'Owner', 'Administrator', 'Manager', 'Head Division', 'Staff', 'Member'].forEach(n => d.jabatan.push({ id: nid('jabatan'), name: n }));
+    seedRules(d);
+    [['2024-01-01', 'Mobile Legends Championship', 'Juara 1 Turnamen MLBB Season 12 Regional Jakarta.', '1'], ['2024-03-01', 'PUBG Mobile Scrims Cup', 'Juara 2 Turnamen PUBG Mobile Scrims Cup.', '2'],
+      ['2024-06-01', 'Free Fire Battle Royale', 'Juara 1 Free Fire Battle Royale tingkat Nasional.', '1'], ['2024-08-01', 'Valorant Community Cup', 'Peringkat 3 Valorant Community Cup.', '3'],
+      ['2024-10-01', 'MLBB National Tournament', 'Juara 1 MLBB National Tournament Season 13.', '1']].forEach(r => d.orgRecords.push({ id: nid('orgRecords'), date: r[0], title: r[1], desc: r[2], rank: r[3], kind: 'prestasi' }));
+    [['NFNC Jersey 2024', 250000], ['NFNC Dark Hoodie', 350000], ['NFNC Snapback Cap', 100000], ['NFNC Varsity Jacket', 450000]].forEach(a => d.apparel.push({ id: nid('apparel'), name: a[0], price: a[1], desc: '', photo: '', shopee: '', tokopedia: '' }));
+    return d;
+  };
+  async function init() {
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+    try { DB = await idbGet(); } catch (e) { persistOk = false; window.dispatchEvent(new Event('nfnc-nopersist')); }
+    if (!DB || !DB.seq) { fresh(); await save(); } else { norm(); await save(); }
+  }
+
+  /* ---------- validasi (port dari server) ---------- */
+  const UPRE = /^data:(image\/(png|jpeg|webp|gif)|video\/(mp4|webm));base64,[A-Za-z0-9+/=]+$/;
+  const F = (k, l, o = {}) => Object.assign({ k, l, max: 200 }, o);
+  const SP = {
+    members: [F('name', 'Nama', { req: 1, max: 60 }), F('email', 'Email', { req: 1, max: 100, lc: 1, re: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ }),
+      F('memberId', 'ID Anggota', { req: 1, max: 20, uc: 1, re: /^[A-Z0-9-]{3,20}$/i }), F('jabatan', 'Jabatan', { req: 1, max: 40 }),
+      F('status', 'Status', { req: 1, t: 'e', o: ['aktif', 'nonaktif'] }), F('role', 'Role', { req: 1, t: 'e', o: ['admin', 'member'] }),
+      F('joinedAt', 'Tanggal bergabung', { t: 'd' }), F('photo', 'Foto', { t: 'u', max: 1e8 })],
+    jabatan: [F('name', 'Nama jabatan', { req: 1, max: 40 })],
+    orgRecords: [F('title', 'Judul', { req: 1, max: 120 }), F('date', 'Tanggal', { req: 1, t: 'd' }), F('rank', 'Peringkat', { t: 'e', o: ['0', '1', '2', '3'], req: 1 }),
+      F('kind', 'Jenis', { t: 'e', o: ['prestasi', 'penghargaan', 'event'], req: 1 }), F('desc', 'Deskripsi', { max: 600 })],
+    memberRecords: [F('memberRef', 'Anggota', { t: 'n', min: 1, req: 1 }), F('title', 'Judul', { req: 1, max: 120 }),
+      F('kind', 'Jenis', { t: 'e', o: ['prestasi', 'penghargaan', 'pencapaian', 'kontribusi'], req: 1 }), F('date', 'Tanggal', { t: 'd', req: 1 }), F('desc', 'Deskripsi', { max: 600 })],
+    apparel: [F('name', 'Nama produk', { req: 1, max: 100 }), F('price', 'Harga', { t: 'n', min: 0, max: 1e9 }), F('desc', 'Deskripsi', { max: 600 }),
+      F('photo', 'Foto', { t: 'u', max: 1e8 }), F('shopee', 'URL Shopee', { t: 'h', max: 500 }), F('tokopedia', 'URL Tokopedia', { t: 'h', max: 500 })],
+    docs: [F('title', 'Judul', { req: 1, max: 120 }), F('desc', 'Deskripsi', { max: 600 }), F('category', 'Kategori', { req: 1, max: 40 }),
+      F('date', 'Tanggal', { t: 'd', req: 1 }), F('type', 'Tipe', { t: 'e', o: ['foto', 'video'], req: 1 }), F('file', 'File', { t: 'u', req: 1, max: 1e8 })],
+    settings: [F('tagline', 'Tagline', { max: 120 }), F('about', 'Tentang', { max: 1000 }), F('foundedYear', 'Tahun berdiri', { t: 'n', min: 1990, max: 2100 }),
+      F('announcement', 'Pengumuman', { max: 300 }), F('shopeeUrl', 'URL Shopee', { t: 'h', max: 500 }), F('tokopediaUrl', 'URL Tokopedia', { t: 'h', max: 500 }), F('shareUrl', 'Link website', { t: 'h', max: 300 })],
+    rules: [F('title', 'Judul rule', { req: 1, max: 100 }), F('desc', 'Isi rule', { max: 600 })]
+  };
+  function clean(spec, b, partial) {
+    const o = {};
+    for (const f of spec) {
+      let v = b[f.k];
+      if (v === undefined) { if (partial) continue; v = ''; } else if (v === null) v = '';
+      if (f.t === 'n') { if (v === '') v = f.def || 0; v = parseInt(v, 10); if (isNaN(v) || v < (f.min ?? -1e9) || v > (f.max ?? 1e9)) return { err: f.l + ' tidak valid' }; o[f.k] = v; continue; }
+      v = String(v).trim();
+      if (!v && f.req) return { err: f.l + ' wajib diisi' };
+      if (v.length > f.max) return { err: f.l + ' terlalu panjang' };
+      if (v) {
+        if (f.t === 'e' && !f.o.includes(v)) return { err: f.l + ' tidak valid' };
+        if (f.t === 'd' && !/^\d{4}-\d{2}-\d{2}$/.test(v)) return { err: f.l + ' harus berupa tanggal' };
+        if (f.t === 'u' && !UPRE.test(v)) return { err: f.l + ' harus berasal dari unggahan' };
+        if (f.t === 'h' && !/^https?:\/\/\S{3,500}$/i.test(v)) return { err: f.l + ' harus diawali http:// atau https://' };
+        if (f.re && !f.re.test(v)) return { err: f.l + ' format tidak valid' };
+        if (f.lc) v = v.toLowerCase();
+        if (f.uc) v = v.toUpperCase();
+      }
+      o[f.k] = v;
+    }
+    return { v: o };
+  }
+  const ieq = (a, b) => String(a).toLowerCase() === String(b).toLowerCase();
+  const activeAdmins = () => DB.members.filter(m => m.role === 'admin' && m.status === 'aktif').length;
+  const byId = (col, id) => DB[col].find(x => x.id === +id) || null;
+  const CHK = {
+    members: (o, ex, b, me) => {
+      const exId = ex ? ex.id : 0;
+      if (DB.members.some(m => m.id !== exId && ieq(m.email, o.email))) return 'Email sudah dipakai';
+      if (DB.members.some(m => m.id !== exId && ieq(m.memberId, o.memberId))) return 'ID anggota sudah dipakai (ID harus unik)';
+      if (!DB.jabatan.some(j => j.name === o.jabatan)) return 'Jabatan tidak ada di daftar';
+      const pw = b.password === undefined ? '' : String(b.password);
+      if ((!ex && pw.length < 8) || (pw && pw.length < 8)) return 'Password minimal 8 karakter';
+      if (ex && ex.role === 'admin' && (o.role !== 'admin' || o.status !== 'aktif')) {
+        if (ex.id === me.id) return 'Tidak bisa menurunkan atau menonaktifkan akun sendiri';
+        if (activeAdmins() < 2) return 'Harus ada minimal satu admin aktif';
+      }
+      return '';
+    },
+    jabatan: (o, ex) => DB.jabatan.some(j => j.id !== (ex ? ex.id : 0) && ieq(j.name, o.name)) ? 'Nama jabatan sudah ada' : '',
+    memberRecords: o => DB.members.some(m => m.id === o.memberRef) ? '' : 'Anggota tidak ditemukan'
+  };
+
+  /* ---------- tampilan data ---------- */
+  const pubM = m => ({ id: m.id, name: m.name, email: m.email, memberId: m.memberId, jabatan: m.jabatan, status: m.status, role: m.role, joinedAt: m.joinedAt, photo: m.photo, points: m.points });
+  const getSettings = () => ({ ...DB.settings, foundedYear: +DB.settings.foundedYear || 2022 });
+  const stats = () => ({
+    members: DB.members.filter(m => m.status === 'aktif').length,
+    j1: DB.orgRecords.filter(r => r.rank === '1').length, j2: DB.orgRecords.filter(r => r.rank === '2').length, j3: DB.orgRecords.filter(r => r.rank === '3').length,
+    awards: DB.orgRecords.filter(r => r.kind === 'penghargaan').length + DB.memberRecords.filter(r => r.kind === 'penghargaan').length
+  });
+  const dd = (a, b) => (b.date || '').localeCompare(a.date || '') || b.id - a.id;
+  const clone = x => JSON.parse(JSON.stringify(x));
+  const audit = (u, action, detail) => { DB.log.push({ id: nid('log'), at: nowIso(), by: u.email, action, detail: String(detail || '').slice(0, 200) }); if (DB.log.length > 1000) DB.log.splice(0, DB.log.length - 1000); };
+  const ptsOut = p => ({ id: p.id, memberRef: p.memberRef, delta: p.delta, balance: p.balance, reason: p.reason, by: p.by, at: p.at });
+  const sigOk = d => { const m = /^data:([a-z]+\/[a-z0-9]+);base64,(.{0,24})/.exec(d); if (!m) return false; let s; try { s = atob(m[2].slice(0, m[2].length - m[2].length % 4)); } catch (e) { return false; } const c = i => s.charCodeAt(i);
+    switch (m[1]) { case 'image/png': return c(0) === 0x89 && s.slice(1, 4) === 'PNG'; case 'image/jpeg': return c(0) === 0xff && c(1) === 0xd8 && c(2) === 0xff; case 'image/gif': return s.slice(0, 4) === 'GIF8';
+      case 'image/webp': return s.slice(0, 4) === 'RIFF' && s.slice(8, 12) === 'WEBP'; case 'video/mp4': return s.slice(4, 8) === 'ftyp'; case 'video/webm': return c(0) === 0x1a && c(1) === 0x45 && c(2) === 0xdf && c(3) === 0xa3; default: return false; } };
+
+  /* ---------- sesi ---------- */
+  const auth = () => { const s = DB.session; if (!s || s.expiresAt < Date.now()) return null; const m = byId('members', s.memberId); return m && m.status === 'aktif' ? m : null; };
+  const startSession = m => { DB.session = { memberId: m.id, expiresAt: Date.now() + SESSION_MS }; };
+
+  /* ---------- router API (sama dengan endpoint server) ---------- */
+  async function call(path, method = 'GET', b = {}) {
+    const u = new URL(path, 'http://x'), p = u.pathname, me = auth();
+    let r;
+    if (p.startsWith('/admin/') || (p === '/upload' && u.searchParams.get('scope') !== 'recruit')) {
+      if (!me) fail(401, 'Silakan login terlebih dahulu');
+      if (me.role !== 'admin') fail(403, 'Akses ditolak. Hanya untuk Admin.');
+    }
+    const done = async v => { await save(); return clone(v); };
+
+    if (p === '/public' && method === 'GET') return clone({ settings: getSettings(), jabatan: DB.jabatan.map(j => ({ id: j.id, name: j.name, count: DB.members.filter(m => m.jabatan === j.name && m.status === 'aktif').length })),
+      org: [...DB.orgRecords].sort(dd), apparel: DB.apparel, docs: [...DB.docs].sort(dd), stats: stats(), rules: me ? [...DB.rules].sort((a, b) => a.id - b.id) : null });
+    if (p === '/awards' && method === 'GET') return clone({ org: DB.orgRecords.filter(r => r.kind === 'penghargaan').sort(dd),
+      members: me ? DB.memberRecords.filter(r => r.kind === 'penghargaan').sort(dd).map(r => ({ r, m: byId('members', r.memberRef) })).filter(x => x.m && x.m.status === 'aktif').map(x => ({ id: x.r.id, title: x.r.title, date: x.r.date, desc: x.r.desc, memberName: x.m.name, memberId: x.m.memberId })) : null });
+    if (p === '/me' && method === 'GET') return { user: me ? pubM(me) : null };
+    if (p === '/setup' && method === 'GET') return { needed: DB.members.length === 0 };
+    if (p === '/setup' && method === 'POST') {
+      if (DB.members.length) fail(400, 'Akun Admin sudah dibuat');
+      const c = clean([F('name', 'Nama', { req: 1, max: 60 }), F('email', 'Email', { req: 1, max: 100, lc: 1, re: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ })], b); if (c.err) fail(400, c.err);
+      const pw = String(b.password || ''); if (pw.length < 8) fail(400, 'Password minimal 8 karakter');
+      const m = { id: nid('members'), ...c.v, memberId: 'NFNC-0001', jabatan: 'Administrator', status: 'aktif', role: 'admin', joinedAt: today(), photo: '', points: 0, profile: {}, ratings: [0, 0, 0, 0, 0], pass: await hash(pw) };
+      DB.members.push(m); startSession(m); audit(m, 'buat akun admin pertama', m.email);
+      return done({ user: pubM(m) });
+    }
+    const putMember = x => {
+      const em = String(x.email || '').trim().toLowerCase(); let m = DB.members.find(y => ieq(y.email, em));
+      const f = { name: String(x.name || '').slice(0, 60), jabatan: DB.jabatan.some(j => j.name === x.jabatan) ? x.jabatan : 'Member', status: x.status === 'nonaktif' ? 'nonaktif' : 'aktif', role: x.role === 'admin' ? 'admin' : 'member', memberId: String(x.memberId || '').toUpperCase(), joinedAt: x.joinedAt || today(), points: Number(x.points) || 0 };
+      if (!m) { m = { id: nid('members'), email: em, photo: '', profile: x.wa ? { wa: String(x.wa) } : {}, ratings: [0, 0, 0, 0, 0], pass: String(x.pass || ''), ...f }; DB.members.push(m); }
+      else { Object.assign(m, f); if (x.pass) m.pass = String(x.pass); }
+      return m;
+    };
+    if (p === '/register-local' && method === 'POST') {
+      if (!DB.members.length) fail(400, 'Belum ada Admin. Buat akun Admin dulu lewat halaman Login (Setup awal).');
+      if (rl('reg', 5, 3600000, true)) fail(429, 'Terlalu banyak pendaftaran. Coba lagi nanti.');
+      const em = String(b.email || '').trim().toLowerCase(), nm = String(b.name || '').trim();
+      if (!nm || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) fail(400, 'Nama atau email tidak valid');
+      if (String(b.password || '').length < 8) fail(400, 'Password minimal 8 karakter');
+      if (DB.members.some(m => ieq(m.email, em))) fail(400, 'Email ini sudah terdaftar. Silakan login.');
+      let mid; do { mid = 'NFNC-' + (1000 + Math.floor(Math.random() * 9000)); } while (DB.members.some(m => ieq(m.memberId, mid)));
+      const m = putMember({ name: nm, email: em, wa: b.wa, jabatan: 'Member', memberId: mid, role: 'member', status: 'aktif', points: 0, pass: await hash(String(b.password)) });
+      startSession(m); return done({ user: pubM(m) });
+    }
+    if (p === '/online/login' && method === 'POST') {
+      const x = b.rec || {}, em = String(x.email || '').trim().toLowerCase(), key = 'olog:' + em;
+      if (rl(key, 8, 600000, false)) fail(429, 'Terlalu banyak percobaan. Coba lagi dalam 10 menit.');
+      if (!em || !(await verify(String(b.password || ''), String(x.pass || '')))) { rl(key, 8, 600000, true); fail(401, 'Email atau password salah'); }
+      if (x.status === 'nonaktif') fail(401, 'Akun nonaktif');
+      const m = putMember(x); startSession(m); return done({ user: pubM(m) });
+    }
+    if (p === '/admin/members/import' && method === 'POST') {
+      let n = 0;
+      for (const x of (Array.isArray(b.items) ? b.items : []).slice(0, 500)) { if (!x.email || !String(x.pass || '').startsWith('pbkdf2$')) continue; if (!DB.members.some(m => ieq(m.email, x.email))) n++; putMember(x); }
+      return done({ added: n });
+    }
+    if (p === '/login' && method === 'POST') {
+      const un = String(b.email || '').trim().toLowerCase(), key = 'login:' + un;
+      if (rl(key, 8, 600000, false)) fail(429, 'Terlalu banyak percobaan. Coba lagi dalam 10 menit.');
+      const u2 = DB.members.find(m => ieq(m.email, un)), ok = await verify(String(b.password || ''), u2 ? u2.pass : 'pbkdf2$00$00');
+      if (!u2 || !ok || u2.status !== 'aktif') { rl(key, 8, 600000, true); fail(401, 'Email atau password salah, atau akun nonaktif'); }
+      startSession(u2); return done({ user: pubM(u2) });
+    }
+    if (p === '/logout' && method === 'POST') { DB.session = null; return done({ ok: 1 }); }
+    if (p === '/change-password' && method === 'POST') {
+      if (!me) fail(401, 'Silakan login terlebih dahulu');
+      if (!(await verify(String(b.old || ''), me.pass))) fail(400, 'Password lama salah');
+      if (String(b.new || '').length < 8) fail(400, 'Password baru minimal 8 karakter');
+      me.pass = await hash(String(b.new)); return done({ ok: 1 });
+    }
+    if (p === '/recruit' && method === 'POST') {
+      if (rl('rec', 5, 3600000, true)) fail(429, 'Terlalu banyak pendaftaran dari perangkat ini. Coba lagi nanti.');
+      const c = clean([F('name', 'Nama lengkap', { req: 1, max: 60 }), F('email', 'Email', { req: 1, max: 100, lc: 1, re: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ }), F('wa', 'No. WhatsApp', { req: 1, max: 20, re: /^[0-9+\-\s]{8,20}$/ }), F('jabatan', 'Jabatan', { req: 1, max: 40 }),
+        F('photo', 'Foto', { t: 'u', max: 1e8 }), F('reason', 'Alasan bergabung', { req: 1, max: 600 }), F('info', 'Informasi tambahan', { max: 600 })], b);
+      if (c.err) fail(400, c.err);
+      const o = c.v, rpw = String(b.password || '');
+      if (rpw.length < 8) fail(400, 'Password minimal 8 karakter');
+      if (!DB.jabatan.some(j => j.name === o.jabatan)) fail(400, 'Jabatan tidak tersedia');
+      if (DB.members.some(m => ieq(m.email, o.email)) || DB.recruits.some(x => x.email === o.email && ['menunggu', 'diproses'].includes(x.status))) fail(400, 'Email sudah dipakai atau sedang diproses');
+      DB.recruits.push({ id: nid('recruits'), name: o.name, email: o.email, wa: o.wa, pass: await hash(rpw), photo: o.photo, jabatan: o.jabatan, reason: o.reason, info: o.info, status: 'menunggu', memberRef: null, createdAt: nowIso() });
+      return done({ ok: 1 });
+    }
+    if (p === '/recruit/status' && method === 'POST') {
+      if (rl('rst', 20, 600000, true)) fail(429, 'Terlalu banyak pengecekan. Coba lagi nanti.');
+      const un = String(b.email || '').trim().toLowerCase(); if (!un) fail(400, 'Email wajib diisi');
+      const rc = [...DB.recruits].reverse().find(x => ieq(x.email, un));
+      return { status: rc ? rc.status : null };
+    }
+    if (p === '/upload' && method === 'POST') {
+      const scope = u.searchParams.get('scope'), du = String(b.dataUrl || ''), mt = /^data:(image\/(png|jpeg|webp|gif)|video\/(mp4|webm));base64,([A-Za-z0-9+/=]+)$/.exec(du);
+      if (!mt) fail(400, 'File harus gambar (PNG/JPG/WEBP/GIF) atau video (MP4/WEBM)');
+      const vid = !!mt[3], size = mt[4].length * 0.75;
+      if (scope === 'recruit' && (vid || size > 2e6)) fail(400, 'Foto pendaftaran maksimal 2 MB');
+      if (size > (vid ? 30e6 : 5e6)) fail(400, vid ? 'Video maksimal 30 MB' : 'Gambar maksimal 5 MB');
+      if (!sigOk(du)) fail(400, 'Isi file tidak sesuai tipenya');
+      return { url: du };
+    }
+    if (p === '/members' && method === 'GET') {
+      if (!me) fail(401, 'Silakan login terlebih dahulu');
+      return { members: clone(DB.members.filter(m => m.status === 'aktif').sort((a, b) => a.memberId.localeCompare(b.memberId)).map(m => ({ ...pubM(m), records: DB.memberRecords.filter(r => r.memberRef === m.id).length }))) };
+    }
+    if ((r = p.match(/^\/members\/(\d+)$/)) && method === 'GET') {
+      if (!me) fail(401, 'Silakan login terlebih dahulu');
+      const t = byId('members', r[1]);
+      if (!t || (t.status !== 'aktif' && me.role !== 'admin' && t.id !== me.id)) fail(404, 'Anggota tidak ditemukan');
+      const full = me.role === 'admin' || me.id === t.id, pr = t.profile || {};
+      const d = { member: pubM(t), records: DB.memberRecords.filter(x => x.memberRef === t.id).sort(dd), ratings: t.ratings || [0, 0, 0, 0, 0], ratingNames: RATING_NAMES, profile: full ? pr : { nick: pr.nick || '', bio: pr.bio || '' } };
+      if (full) d.points = DB.points.filter(x => x.memberRef === t.id).sort((a, b) => b.id - a.id).slice(0, 30).map(ptsOut);
+      return clone(d);
+    }
+
+    if (p === '/profile' && method === 'PUT') {
+      if (!me) fail(401, 'Silakan login terlebih dahulu');
+      const c = clean([F('nama', 'Nama lengkap', { max: 60 }), F('nick', 'Nickname', { max: 40 }), F('umur', 'Umur', { max: 3, re: /^\d{1,3}$/ }), F('wa', 'No. WhatsApp', { max: 20, re: /^[0-9+\-\s]*$/ }), F('alamat', 'Alamat/Kota', { max: 100 }), F('bio', 'Bio', { max: 300 })], b);
+      if (c.err) fail(400, c.err);
+      me.profile = c.v; return done({ ok: 1 });
+    }
+    /* ----- admin ----- */
+    if (p === '/admin/data' && method === 'GET') return clone({ members: [...DB.members].sort((a, b) => a.memberId.localeCompare(b.memberId)).map(m => ({ ...pubM(m), wa: (m.profile || {}).wa || '' })), jabatan: DB.jabatan, recruits: [...DB.recruits].sort((a, b) => b.id - a.id).map(x => { const { pass, ...rest } = x; return rest; }),
+      orgRecords: [...DB.orgRecords].sort(dd), memberRecords: [...DB.memberRecords].sort(dd), apparel: DB.apparel, docs: [...DB.docs].sort(dd), rules: [...DB.rules].sort((a, b) => a.id - b.id), settings: getSettings(), lastBackup: DB.lastBackup || null,
+      points: [...DB.points].sort((a, b) => b.id - a.id).slice(0, 300).map(ptsOut), log: [...DB.log].sort((a, b) => b.id - a.id).slice(0, 200) });
+    if (p === '/admin/settings' && method === 'PUT') {
+      const c = clean(SP.settings, b, true); if (c.err) fail(400, c.err);
+      for (const [k, v] of Object.entries(c.v)) DB.settings[k] = String(v);
+      audit(me, 'ubah pengaturan home', Object.keys(c.v).join(',')); return done({ ok: 1 });
+    }
+    if (p === '/admin/backup' && method === 'GET') { DB.lastBackup = nowIso(); await save(); return clone(DB); }
+    if (p === '/admin/export' && method === 'GET') return clone(DB.members.map(m => { const pr = m.profile || {}; return { email: m.email, name: m.name, memberId: m.memberId, jabatan: m.jabatan, role: m.role, status: m.status, joinedAt: m.joinedAt, points: m.points, nick: pr.nick || '', nama: pr.nama || '', umur: pr.umur || '', wa: pr.wa || '', alamat: pr.alamat || '', bio: pr.bio || '', rating: (m.ratings || []).join('/') }; }));
+    if (p === '/admin/restore' && method === 'POST') {
+      const d = b.data;
+      const okShape = d && d.v === 1 && d.seq && d.settings && ['jabatan', 'members', 'recruits', 'orgRecords', 'memberRecords', 'apparel', 'docs', 'points', 'log'].every(k => Array.isArray(d[k]));
+      if (!okShape) fail(400, 'File cadangan tidak valid');
+      if (!d.members.some(m => m.role === 'admin' && m.status === 'aktif')) fail(400, 'Cadangan harus memuat minimal satu admin aktif');
+      const keep = me.email; d.session = null; DB = clone(d); norm();
+      const nm = DB.members.find(m => ieq(m.email, keep) && m.role === 'admin' && m.status === 'aktif'); if (nm) startSession(nm);
+      audit(nm || { email: keep }, 'pulihkan cadangan data', ''); return done({ ok: 1 });
+    }
+    if ((r = p.match(/^\/admin\/members\/(\d+)\/ratings$/)) && method === 'PUT') {
+      const t = byId('members', r[1]); if (!t) fail(404, 'Anggota tidak ditemukan');
+      const a = Array.isArray(b.ratings) ? b.ratings.map(x => parseInt(x, 10)) : [];
+      if (a.length !== 5 || a.some(x => isNaN(x) || x < 0 || x > 100)) fail(400, 'Rating harus 5 angka antara 0 dan 100');
+      t.ratings = a; audit(me, 'ubah rating', t.memberId); return done({ ok: 1 });
+    }
+    if ((r = p.match(/^\/admin\/members\/(\d+)\/points$/)) && method === 'POST') {
+      const t = byId('members', r[1]); if (!t) fail(404, 'Anggota tidak ditemukan');
+      const d = parseInt(b.delta, 10), reason = String(b.reason || '').trim().slice(0, 100);
+      if (!d || Math.abs(d) > 100000) fail(400, 'Jumlah point tidak valid');
+      t.points = Math.max(0, t.points + d);
+      DB.points.push({ id: nid('points'), memberRef: t.id, delta: d, balance: t.points, reason, by: me.email, at: nowIso() });
+      audit(me, 'ubah point', `${t.memberId} ${d > 0 ? '+' : ''}${d} (${reason})`);
+      return done({ member: pubM(t) });
+    }
+    if ((r = p.match(/^\/admin\/recruits\/(\d+)(\/accept)?$/))) {
+      const rc = byId('recruits', r[1]); if (!rc) fail(404, 'Pendaftaran tidak ditemukan');
+      if (r[2] && method === 'POST') {
+        if (rc.status === 'diterima') fail(400, 'Pendaftaran sudah diterima');
+        const own = !String(b.password || '') && !!rc.pass, pw = String(b.password || '') || (own ? 'tidak-dipakai-1' : hex(crypto.getRandomValues(new Uint8Array(5))));
+        const mem = { name: rc.name, email: rc.email, memberId: String(b.memberId || '').trim().toUpperCase(), jabatan: String(b.jabatan || rc.jabatan), status: 'aktif', role: 'member', joinedAt: today(), photo: rc.photo || '' };
+        if (!/^[A-Z0-9-]{3,20}$/.test(mem.memberId)) fail(400, 'ID anggota tidak valid');
+        const e = CHK.members(mem, null, { password: pw }, me); if (e) fail(400, e);
+        const m = { id: nid('members'), ...mem, points: 0, profile: rc.wa ? { wa: rc.wa } : {}, ratings: [0, 0, 0, 0, 0], pass: own ? rc.pass : await hash(pw) };
+        DB.members.push(m); rc.status = 'diterima'; rc.pass = ''; rc.memberRef = m.id; audit(me, 'terima pendaftaran', `${rc.email} → ${mem.memberId}`);
+        await save(); return { member: pubM(m), tempPassword: own ? null : pw, wa: rc.wa || '' };
+      }
+      if (method === 'PUT') {
+        if (!['menunggu', 'diproses', 'ditolak'].includes(b.status)) fail(400, 'Status tidak valid');
+        if (rc.status === 'diterima') fail(400, 'Pendaftaran yang sudah diterima tidak dapat diubah');
+        rc.status = b.status; audit(me, 'status pendaftaran', `${rc.email} → ${b.status}`); return done({ ok: 1 });
+      }
+      if (method === 'DELETE') { DB.recruits.splice(DB.recruits.indexOf(rc), 1); audit(me, 'hapus pendaftaran', rc.email); return done({ ok: 1 }); }
+    }
+    if ((r = p.match(/^\/admin\/(members|jabatan|orgRecords|memberRecords|apparel|docs|rules)(?:\/(\d+))?$/))) {
+      const col = r[1], id = r[2] ? +r[2] : null, ex = id ? byId(col, id) : null, label = o => o.name || o.title || o.memberId || '';
+      const out = row => col === 'members' ? pubM(row) : row;
+      if (method === 'POST' && !id) {
+        const c = clean(SP[col], b); if (c.err) fail(400, c.err);
+        const o = { ...c.v }, e = (CHK[col] || (() => ''))(o, null, b, me); if (e) fail(400, e);
+        const row = { id: nid(col), ...o };
+        if (col === 'members') { row.pass = await hash(String(b.password)); row.points = 0; row.profile = {}; row.ratings = [0, 0, 0, 0, 0]; row.joinedAt = o.joinedAt || today(); }
+        DB[col].push(row); audit(me, 'tambah ' + col, label(o)); return done({ item: out(row) });
+      }
+      if (method === 'PUT' && id) {
+        if (!ex) fail(404, 'Data tidak ditemukan');
+        const c = clean(SP[col], b, true); if (c.err) fail(400, c.err);
+        const o = { ...ex, ...c.v }, e = (CHK[col] || (() => ''))(o, ex, b, me); if (e) fail(400, e);
+        const upd = { ...c.v }; if (col === 'members' && b.password) upd.pass = await hash(String(b.password));
+        if (col === 'jabatan' && upd.name && upd.name !== ex.name) { const old = ex.name; DB.members.forEach(m => { if (m.jabatan === old) m.jabatan = upd.name; }); DB.recruits.forEach(x => { if (x.jabatan === old) x.jabatan = upd.name; }); }
+        Object.assign(ex, upd);
+        if (col === 'members' && (b.password || ex.status !== 'aktif') && DB.session && DB.session.memberId === id) DB.session = null;
+        audit(me, 'ubah ' + col, label(ex)); return done({ item: out(ex) });
+      }
+      if (method === 'DELETE' && id) {
+        if (!ex) fail(404, 'Data tidak ditemukan');
+        if (col === 'members') {
+          if (ex.id === me.id) fail(400, 'Tidak bisa menghapus akun sendiri');
+          if (ex.role === 'admin' && activeAdmins() < 2) fail(400, 'Harus ada minimal satu admin aktif');
+        }
+        if (col === 'jabatan' && DB.members.some(m => m.jabatan === ex.name)) fail(400, 'Jabatan masih dipakai anggota');
+        DB[col].splice(DB[col].indexOf(ex), 1);
+        if (col === 'members') { DB.memberRecords = DB.memberRecords.filter(x => x.memberRef !== id); DB.points = DB.points.filter(x => x.memberRef !== id); DB.recruits.forEach(x => { if (x.memberRef === id) x.memberRef = null; }); }
+        audit(me, 'hapus ' + col, label(ex)); return done({ ok: 1 });
+      }
+    }
+    fail(404, 'Endpoint tidak ditemukan');
+  }
+  return { init, call, hash, persisted: () => persistOk, storage: async () => { let p = false, e = {}; try { p = !!(navigator.storage && navigator.storage.persisted && await navigator.storage.persisted()); e = (navigator.storage && navigator.storage.estimate && await navigator.storage.estimate()) || {}; } catch (x) {} return { persisted: p, usage: e.usage || 0, quota: e.quota || 0 }; } };
+})();
+
+</script>
+<script>
+'use strict';
+/* ---------- util ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const idr = n => 'IDR ' + Number(n || 0).toLocaleString('id-ID');
+const dt = s => s ? new Date(s).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+const today = () => new Date().toISOString().slice(0, 10);
+const RK = { 1: ['🏆 JUARA 1', 'r1'], 2: ['🥈 JUARA 2', 'r2'], 3: ['🥉 JUARA 3', 'r3'] };
+const RIGHTS = ['Mengelola anggota, ID, jabatan, dan status', 'Mengatur Point dan melihat riwayatnya', 'Mengelola rekor organisasi dan rekor anggota', 'Mengelola apparel, URL Shopee dan Tokopedia', 'Mengelola dokumentasi dan data recruitment', 'Mengatur informasi halaman utama', 'Melihat riwayat aktivitas Admin'];
+let ME = null, PD = null, AD = null, ATAB = 'dash', MF = { q: '', j: '', s: 'id' }, PF = { q: '', j: '' }, DF = '', ROSTER = [];
+
+async function api(path, method = 'GET', body) { try { return await Engine.call(path, method, body); } catch (e) { throw new Error(e.message || 'Terjadi kesalahan'); } }
+function toast(m, bad) { const t = $('#toast'); t.textContent = m; t.className = 'toast show' + (bad ? ' bad' : ''); clearTimeout(toast.h); toast.h = setTimeout(() => { t.className = 'toast'; }, 3800); }
+function modal(title, html) { $('#mTitle').textContent = title; $('#mBody').innerHTML = html; $('#modal').classList.add('open'); }
+function closeModal() { $('#modal').classList.remove('open'); $('#mBody').innerHTML = ''; }
+const run = fn => async (...a) => { try { await fn(...a); } catch (e) { toast(e.message, 1); } };
+const head = (t, s) => `<h2 class="title">${t}</h2><p class="sub">${s}</p>`;
+const av = (m, c = '') => m.photo ? `<img class="av ${c}" src="${esc(m.photo)}" alt="Foto ${esc(m.name)}">` : `<div class="av ${c}">👤</div>`;
+const isVid = v => /^data:video\//.test(v || '') || /\.(mp4|webm)$/.test(v || '');
+const prev = v => v ? (isVid(v) ? `<video src="${esc(v)}" controls preload="metadata"></video>` : `<img src="${esc(v)}" alt="">`) : '<span class="muted">Belum ada file</span>';
+const tbl = (h, rows) => `<div class="tw"><table><thead><tr>${h.map(x => `<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.join('') || `<tr><td colspan="${h.length}" class="muted">Belum ada data.</td></tr>`}</tbody></table></div>`;
+
+function fh(f, v = '') {
+  let c;
+  if (f.t === 'select') c = `<select name="${f.k}">${f.o.map(o => { const [a, b] = Array.isArray(o) ? o : [o, o]; return `<option value="${esc(a)}"${String(a) === String(v) ? ' selected' : ''}>${esc(b)}</option>`; }).join('')}</select>`;
+  else if (f.t === 'textarea') c = `<textarea name="${f.k}">${esc(v)}</textarea>`;
+  else if (f.t === 'up') c = `<div class="up"><input type="hidden" name="${f.k}" value="${esc(v)}"><div class="prev">${prev(v)}</div><input type="file" accept="${f.accept || 'image/*'}" data-up="${f.scope || 'admin'}" aria-label="${esc(f.l)}"><button type="button" class="btn sm ghost" data-act="up-clear">Hapus file</button></div>`;
+  else c = `<input name="${f.k}" type="${f.t || 'text'}" value="${esc(v)}"${f.req ? ' required' : ''}${f.t === 'password' ? ' autocomplete="new-password"' : ''}${f.ph ? ` placeholder="${esc(f.ph)}"` : ''}${f.t === 'number' ? ' min="0"' : ''}>`;
+  return `<label class="fl">${f.l}</label>${c}`;
+}
+const formObj = f => Object.fromEntries([...new FormData(f)].filter(([, v]) => typeof v === 'string'));
+
+/* ---------- nav + halaman ---------- */
+let PAGE = 'home', NEED = '';
+const NEEDS = { members: 'login', profile: 'login', admin: 'admin' };
+const TITLES = { home: 'Home', members: 'Members', positions: 'Jabatan', records: 'Rekor', awards: 'Penghargaan', documentation: 'Dokumentasi', apparel: 'Apparel', recruit: 'Recruit', profile: 'Profile', admin: 'Admin Panel', login: 'Login' };
+const go = (p, q) => { const t = '#/' + p + (q ? '?' + q : ''); if (location.hash === t) route(); else location.hash = t; };
+const NAV = [['home', 'Home'], ['members', 'Members', 'a'], ['positions', 'Jabatan'], ['records', 'Rekor'], ['documentation', 'Dokumentasi'], ['apparel', 'Apparel'], ['recruit', 'Recruit'], ['profile', 'Profile', 'a'], ['admin', 'Admin Panel', 'm']];
+function renderNav() {
+  $('#nav').innerHTML = '<ul>' + NAV.filter(n => !n[2] || (n[2] === 'a' && ME) || (n[2] === 'm' && ME && ME.role === 'admin')).map(n => `<li><a href="#/${n[0]}" class="${n[2] === 'm' ? 'adm ' : ''}${n[0] === PAGE ? 'active' : ''}">${n[1]}</a></li>`).join('') + '</ul>';
+  $('#auth').innerHTML = ME ? `<span class="who">${esc(ME.name)}</span><span class="badge ${ME.role === 'admin' ? 'adm' : 'mem'}">${ME.role === 'admin' ? '👑 ADMIN' : '👤 MEMBER'}</span><button class="btn sm danger" data-act="logout">Logout</button>` : '<a class="btn sm" href="#/login">Login</a>';
+}
+const PAGES = {};
+
+/* ---------- public views ---------- */
+PAGES.home = async () => {
+  const s = PD.settings, t = PD.stats;
+  return `<section class="hero"><div class="hero-logo">NFNC</div><p class="est">EST. ${esc(s.foundedYear)}</p><p class="tag">${esc(s.tagline)}</p>${s.announcement ? `<div class="notice">📢 ${esc(s.announcement)}</div>` : ''}<p class="about">${esc(s.about)}</p><div class="cta"><a class="btn" href="#/recruit">Gabung Sekarang</a><a class="btn ghost" href="#/records">Lihat Rekor</a></div></section><div class="stats">${[[t.members, 'Anggota Aktif'], [t.j1, 'Total Juara 1'], [t.awards, 'Penghargaan'], [s.foundedYear, 'Berdiri']].map(x => `<div class="card stat"><b>${esc(x[0])}</b><span>${x[1]}</span></div>`).join('')}</div>`;
+};
+const rulesBlock = () => `<h3 class="sec">RULES NFNC</h3><p class="sub">Aturan Wajib Semua Anggota</p>` + (PD.rules ? `<div class="rules">${PD.rules.map((r, i) => `<div class="card rule"><div class="rn">${String(i + 1).padStart(2, '0')}</div><div><h3>${esc(r.title)}</h3><p class="muted">${esc(r.desc)}</p></div></div>`).join('') || '<p class="muted center">Belum ada rule.</p>'}</div>` : '<p class="muted center">Login sebagai anggota untuk melihat rules.</p>');
+PAGES.positions = async () => head('STRUKTUR JABATAN', 'Posisi Resmi di NFNC') + `<div class="grid">${PD.jabatan.map(j => `<div class="card center"><div class="ico">🎖️</div><h3>${esc(j.name)}</h3><p class="muted">${j.count} anggota</p></div>`).join('')}</div>` + rulesBlock();
+const mcard = m => `<div class="card mc" data-act="member" data-id="${m.id}">${av(m)}<span class="tid">${esc(m.memberId)}</span><h3>${esc(m.name)}</h3><p class="muted">${esc(m.email)}</p><div class="badges c"><span class="badge gold">🎖️ ${esc(m.jabatan)}</span>${m.role === 'admin' ? '<span class="badge adm">👑 ADMIN</span>' : ''}</div><p class="muted">💎 ${m.points} Point${m.records !== undefined ? ' • ' + m.records + ' rekor' : ''}</p></div>`;
+PAGES.records = async () => {
+  const t = PD.stats;
+  let h = head('REKOR NFNC', 'Prestasi &amp; Perjalanan Organisasi') + `<div class="stats gold">${[[t.j1, '🏆 Juara 1'], [t.j2, '🥈 Juara 2'], [t.j3, '🥉 Juara 3'], [t.awards, '⭐ Penghargaan']].map(x => `<div class="card stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div><h3 class="sec">TIMELINE PRESTASI</h3><div class="tl">${PD.org.map(r => { const b = RK[r.rank]; return `<div class="card"><p class="muted">📅 ${dt(r.date)}</p><h3>${esc(r.title)}</h3><p class="muted">${esc(r.desc)}</p>${b ? `<span class="badge ${b[1]}">${b[0]}</span>` : `<span class="badge">${esc(r.kind)}</span>`}</div>`; }).join('') || '<p class="muted center">Belum ada rekor.</p>'}</div>`;
+  h += (await PAGES.awards()).replace(/^<h2 class="title">[\s\S]*?<\/h2><p class="sub">[\s\S]*?<\/p>/, '');
+  if (ME) { const d = await api('/members'); ROSTER = d.members; h += `<h3 class="sec">REKOR ANGGOTA</h3><p class="sub">Klik anggota untuk melihat rekor pribadi</p><div class="grid">${ROSTER.map(mcard).join('')}</div>`; }
+  return h;
+};
+const docGrid = () => PD.docs.filter(d => !DF || d.category === DF).map(d => `<div class="card doc">${d.type === 'video' ? `<video src="${esc(d.file)}" controls preload="metadata"></video>` : `<img src="${esc(d.file)}" alt="${esc(d.title)}" loading="lazy" data-act="zoom" data-src="${esc(d.file)}">`}<h3>${esc(d.title)}</h3><p class="muted">${esc(d.category)} • ${dt(d.date)}</p><p>${esc(d.desc)}</p></div>`).join('') || '<p class="muted center">Belum ada dokumentasi.</p>';
+PAGES.documentation = async () => { const cats = [...new Set(PD.docs.map(d => d.category))]; return head('DOKUMENTASI', 'Arsip Kegiatan NFNC') + `<div class="bar"><select data-chg="docf" aria-label="Filter kategori"><option value="">Semua kategori</option>${cats.map(c => `<option${c === DF ? ' selected' : ''}>${esc(c)}</option>`).join('')}</select></div><div class="grid docs" id="dgrid">${docGrid()}</div>`; };
+PAGES.apparel = async () => {
+  const s = PD.settings;
+  return head('OFFICIAL APPAREL', 'NFNC Merchandise Collection') + `<div class="grid">${PD.apparel.map(a => { const sh = a.shopee || s.shopeeUrl, tk = a.tokopedia || s.tokopediaUrl; return `<div class="card"><div class="pimg">${a.photo ? `<img src="${esc(a.photo)}" alt="${esc(a.name)}" loading="lazy">` : '<span>NO PHOTO</span>'}</div><h3>${esc(a.name)}</h3><p class="price">${idr(a.price)}</p><p class="muted">${esc(a.desc)}</p><div class="btns">${sh ? `<a class="btn shopee" href="${esc(sh)}" target="_blank" rel="noopener noreferrer">ORDER VIA SHOPEE</a>` : '<span class="btn off">SHOPEE BELUM TERSEDIA</span>'}${tk ? `<a class="btn toped" href="${esc(tk)}" target="_blank" rel="noopener noreferrer">ORDER VIA TOKOPEDIA</a>` : '<span class="btn off">TOKOPEDIA BELUM TERSEDIA</span>'}</div></div>`; }).join('')}</div>`;
+};
+PAGES.recruit = async () => head('JOIN NFNC', 'Formulir Pendaftaran Anggota') + `<form class="fbox" data-form="recruit">${fh({ k: 'name', l: 'Nama Lengkap', req: 1 })}${fh({ k: 'email', t: 'email', l: 'Email yang diinginkan', req: 1, ph: 'nama@email.com' })}${fh({ k: 'wa', l: 'No. WhatsApp (untuk dihubungi Admin)', t: 'tel', req: 1, ph: '08xxxxxxxxxx' })}${fh({ k: 'password', l: 'Buat Password (min. 8 karakter)', t: 'password', req: 1 })}${fh({ k: 'password2', l: 'Ulangi Password', t: 'password', req: 1 })}${fh({ k: 'photo', l: 'Foto Profil (opsional, maks. 2 MB)', t: 'up', accept: 'image/png,image/jpeg,image/webp', scope: 'recruit' })}${fh({ k: 'jabatan', l: 'Jabatan / Posisi yang dilamar', t: 'select', o: PD.jabatan.map(j => j.name) })}${fh({ k: 'reason', l: 'Alasan Bergabung', t: 'textarea', req: 1 })}${fh({ k: 'info', l: 'Informasi Tambahan', t: 'textarea' })}<button class="btn full">KIRIM PENDAFTARAN</button></form><form class="fbox" data-form="rstatus"><h3>Cek Status Pendaftaran</h3>${fh({ k: 'email', t: 'email', l: 'Email yang didaftarkan', req: 1 })}<button class="btn full">CEK STATUS</button><p id="rres" class="center mt" role="status"></p></form>`;
+
+/* ---------- member views ---------- */
+const mgrid = () => { const q = PF.q.toLowerCase(); return ROSTER.filter(m => (!PF.j || m.jabatan === PF.j) && (!q || [m.name, m.email, m.memberId].some(x => x.toLowerCase().includes(q)))).map(mcard).join('') || '<p class="muted center">Tidak ada anggota.</p>'; };
+PAGES.members = async () => {
+  ROSTER = (await api('/members')).members;
+  return head('SQUAD IDENTITY', 'Roster Resmi NFNC') + `<div class="bar"><input placeholder="Cari nama / email / ID" data-inp="mq" value="${esc(PF.q)}" aria-label="Cari anggota"><select data-chg="mj" aria-label="Filter jabatan"><option value="">Semua jabatan</option>${PD.jabatan.map(j => `<option${j.name === PF.j ? ' selected' : ''}>${esc(j.name)}</option>`).join('')}</select></div><div class="grid" id="mgrid">${mgrid()}</div>`;
+};
+const PROF_F = [['nick', 'Nickname'], ['nama', 'Nama Lengkap'], ['umur', 'Umur'], ['wa', 'No. WhatsApp'], ['alamat', 'Alamat / Kota'], ['bio', 'Bio']];
+const extra = d => `<h3 class="sec2">Performance Rating</h3>${(d.ratingNames || []).map((n, i) => { const v = d.ratings[i], c = v > 90 ? ' gold' : v < 50 ? ' danger' : ''; return `<div class="rb"><div class="rl"><span>${esc(n)}</span><span>${v}%</span></div><div class="rbar"><div class="rf${c}" style="width:${v}%"></div></div></div>`; }).join('')}<h3 class="sec2">Data Diri</h3>${PROF_F.filter(f => d.points || f[0] === 'nick' || f[0] === 'bio').map(f => `<div class="drow"><span>${f[1]}</span><span>${(d.profile && d.profile[f[0]]) ? esc(d.profile[f[0]]) : '—'}</span></div>`).join('')}`;
+function mview(d) {
+  const m = d.member, a = m.role === 'admin', aw = d.records.filter(r => r.kind === 'penghargaan').length;
+  return `<div class="prof${a ? ' is-admin' : ''}"><div class="ph">${av(m, 'xl')}<div><span class="tid">${esc(m.memberId)}</span><h2>${esc(m.name)}</h2><p class="muted">${esc(m.email)}</p><div class="badges"><span class="badge ${a ? 'adm' : 'mem'}">${a ? '👑 ADMINISTRATOR' : '👤 MEMBER'}</span><span class="badge gold">🎖️ ${esc(m.jabatan)}</span><span class="badge ${m.status === 'aktif' ? 'ok' : 'off'}">${esc(m.status.toUpperCase())}</span></div></div></div><div class="info"><div><b>${m.points}</b><span>POINT</span></div><div><b>${dt(m.joinedAt)}</b><span>BERGABUNG</span></div><div><b>${d.records.length}</b><span>REKOR</span></div><div><b>${aw}</b><span>PENGHARGAAN</span></div></div>${extra(d)}${a ? `<div class="rights"><h3>HAK AKSES ADMINISTRATOR</h3><ul>${RIGHTS.map(x => `<li>✔ ${x}</li>`).join('')}</ul></div>` : ''}<h3 class="sec2">Rekor &amp; Penghargaan</h3>${d.records.length ? `<ul class="list">${d.records.map(r => `<li><b>${esc(r.title)}</b> <span class="badge">${esc(r.kind)}</span><br><span class="muted">${dt(r.date)} ${esc(r.desc)}</span></li>`).join('')}</ul>` : '<p class="muted">Belum ada rekor.</p>'}${d.points ? `<h3 class="sec2">Riwayat Point</h3>${d.points.length ? `<ul class="list">${d.points.map(p => `<li><b class="${p.delta > 0 ? 'plus' : 'minus'}">${p.delta > 0 ? '+' : ''}${p.delta}</b> • saldo ${p.balance} • <span class="muted">${dt(p.at)} ${esc(p.reason)}</span></li>`).join('')}</ul>` : '<p class="muted">Belum ada riwayat.</p>'}` : ''}</div>`;
+}
+PAGES.profile = async () => { const d = await api('/members/' + ME.id), p = d.profile || {}; return head('MY PROFILE', ME.role === 'admin' ? 'Profil Administrator' : 'Member Dashboard') + mview(d) + `<form class="fbox" data-form="profile"><h3>Edit Data Diri</h3>${fh({ k: 'nick', l: 'Nickname' }, p.nick)}${fh({ k: 'nama', l: 'Nama Lengkap' }, p.nama)}${fh({ k: 'umur', l: 'Umur', t: 'number' }, p.umur)}${fh({ k: 'wa', l: 'No. WhatsApp', t: 'tel' }, p.wa)}${fh({ k: 'alamat', l: 'Alamat / Kota' }, p.alamat)}${fh({ k: 'bio', l: 'Bio singkat', t: 'textarea' }, p.bio)}<button class="btn full">💾 SIMPAN DATA DIRI</button></form><form class="fbox" data-form="pw"><h3>Ganti Password</h3>${fh({ k: 'old', l: 'Password Lama', t: 'password', req: 1 })}${fh({ k: 'new', l: 'Password Baru (min. 8 karakter)', t: 'password', req: 1 })}<button class="btn full">SIMPAN PASSWORD</button></form>`; };
+
+/* ---------- admin panel ---------- */
+const TABS = [['dash', '📊 Dashboard'], ['members', '👥 Anggota'], ['jabatan', '🎖️ Jabatan'], ['recruits', '📝 Recruit'], ['org', '🏆 Rekor Org'], ['mrec', '⭐ Rekor Anggota'], ['apparel', '🛍️ Apparel'], ['docs', '📷 Dokumentasi'], ['rules', '📜 Rules'], ['home', '🏠 Home'], ['share', '📤 Share'], ['log', '📜 Log'], ['backup', '💾 Cadangan']];
+const nextId = () => 'NFNC-' + String(Math.max(0, ...AD.members.map(m => parseInt(String(m.memberId).replace(/\D/g, ''), 10) || 0)) + 1).padStart(4, '0');
+let RF = '';
+const waLink = (n, t) => { let d = String(n || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '62' + d.slice(1); return 'https://wa.me/' + d + (t ? '?text=' + encodeURIComponent(t) : ''); };
+const recruitBar = () => { const c = s => AD.recruits.filter(r => r.status === s).length; return `<div class="bar"><select data-chg="rf" aria-label="Filter status"><option value="">Semua status (${AD.recruits.length})</option>${['menunggu', 'diproses', 'diterima', 'ditolak'].map(s => `<option value="${s}"${RF === s ? ' selected' : ''}>${s} (${c(s)})</option>`).join('')}</select></div>`; };
+const SB = { menunggu: 'warn', diproses: 'mem', diterima: 'ok', ditolak: 'off' };
+function cfg(c) {
+  const mn = id => { const m = AD.members.find(x => x.id === +id); return m ? m.name + ' (' + m.memberId + ')' : '—'; };
+  const th = (u, t) => u ? (t === 'video' ? '🎬' : `<img class="th" src="${esc(u)}" alt="">`) : '—';
+  return {
+    rules: { t: 'Rule', h: ['Judul', 'Isi'], c: r => [esc(r.title), esc(r.desc)], f: [{ k: 'title', l: 'Judul Rule', req: 1 }, { k: 'desc', l: 'Isi Rule', t: 'textarea' }] },
+    jabatan: { t: 'Jabatan', h: ['Jabatan'], c: r => [esc(r.name)], f: [{ k: 'name', l: 'Nama Jabatan', req: 1 }] },
+    orgRecords: { t: 'Rekor Organisasi', h: ['Tanggal', 'Judul', 'Peringkat', 'Jenis'], c: r => [dt(r.date), esc(r.title), RK[r.rank] ? RK[r.rank][0] : '—', esc(r.kind)], f: [{ k: 'title', l: 'Judul', req: 1 }, { k: 'date', l: 'Tanggal', t: 'date', req: 1 }, { k: 'rank', l: 'Peringkat', t: 'select', o: [['1', 'Juara 1'], ['2', 'Juara 2'], ['3', 'Juara 3'], ['0', 'Tanpa peringkat']] }, { k: 'kind', l: 'Jenis', t: 'select', o: ['prestasi', 'penghargaan', 'event'] }, { k: 'desc', l: 'Deskripsi', t: 'textarea' }] },
+    memberRecords: { t: 'Rekor Anggota', h: ['Anggota', 'Judul', 'Jenis', 'Tanggal'], c: r => [esc(mn(r.memberRef)), esc(r.title), esc(r.kind), dt(r.date)], f: [{ k: 'memberRef', l: 'Anggota', t: 'select', o: AD.members.map(m => [m.id, m.name + ' (' + m.memberId + ')']) }, { k: 'title', l: 'Judul', req: 1 }, { k: 'kind', l: 'Jenis', t: 'select', o: ['prestasi', 'penghargaan', 'pencapaian', 'kontribusi'] }, { k: 'date', l: 'Tanggal', t: 'date', req: 1 }, { k: 'desc', l: 'Deskripsi', t: 'textarea' }] },
+    apparel: { t: 'Produk Apparel', h: ['Foto', 'Nama', 'Harga', 'Toko'], c: r => [th(r.photo), esc(r.name), idr(r.price), ((r.shopee ? 'Shopee ' : '') + (r.tokopedia ? 'Tokopedia' : '')) || '—'], f: [{ k: 'name', l: 'Nama Produk', req: 1 }, { k: 'price', l: 'Harga (IDR)', t: 'number', req: 1 }, { k: 'desc', l: 'Deskripsi', t: 'textarea' }, { k: 'photo', l: 'Foto Produk', t: 'up', accept: 'image/png,image/jpeg,image/webp,image/gif' }, { k: 'shopee', l: 'URL Shopee', t: 'url', ph: 'https://shopee.co.id/...' }, { k: 'tokopedia', l: 'URL Tokopedia', t: 'url', ph: 'https://www.tokopedia.com/...' }] },
+    docs: { t: 'Dokumentasi', h: ['File', 'Judul', 'Kategori', 'Tanggal'], c: r => [th(r.file, r.type), esc(r.title), esc(r.category), dt(r.date)], f: [{ k: 'title', l: 'Judul', req: 1 }, { k: 'category', l: 'Kategori (mis. Turnamen, Kebersamaan)', req: 1 }, { k: 'date', l: 'Tanggal', t: 'date', req: 1 }, { k: 'file', l: 'Foto / Video (foto maks. 5 MB, video maks. 30 MB)', t: 'up', accept: 'image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm' }, { k: 'desc', l: 'Deskripsi', t: 'textarea' }] }
+  }[c];
+}
+function gen(col) {
+  const g = cfg(col), rows = [...AD[col]].sort(col === 'rules' ? (a, b) => a.id - b.id : (a, b) => (b.date || '').localeCompare(a.date || '') || b.id - a.id);
+  return `<div class="bar"><button class="btn" data-act="c-add" data-col="${col}">+ TAMBAH ${g.t.toUpperCase()}</button></div>` + tbl([...g.h, 'Aksi'], rows.map(r => `<tr>${g.c(r).map(x => `<td>${x}</td>`).join('')}<td class="acts"><button class="btn sm" data-act="c-edit" data-col="${col}" data-id="${r.id}">Edit</button><button class="btn sm danger" data-act="c-del" data-col="${col}" data-id="${r.id}">Hapus</button></td></tr>`));
+}
+function mtable() {
+  const q = MF.q.toLowerCase(), cmp = { id: (a, b) => a.memberId.localeCompare(b.memberId, undefined, { numeric: true }), idd: (a, b) => b.memberId.localeCompare(a.memberId, undefined, { numeric: true }), pd: (a, b) => b.points - a.points, pa: (a, b) => a.points - b.points }[MF.s];
+  const l = AD.members.filter(m => (!MF.j || m.jabatan === MF.j) && (!q || [m.name, m.email, m.memberId].some(x => x.toLowerCase().includes(q)))).sort(cmp);
+  return tbl(['Foto', 'Nama', 'Email', 'ID', 'Jabatan', 'Point', 'Status', 'Aksi'], l.map(m => `<tr><td>${m.photo ? `<img class="th" src="${esc(m.photo)}" alt="">` : '👤'}</td><td>${esc(m.name)} ${m.role === 'admin' ? '<span class="badge adm">ADMIN</span>' : ''}</td><td>${esc(m.email)}</td><td>${esc(m.memberId)}</td><td>${esc(m.jabatan)}</td><td>${m.points}</td><td><span class="badge ${m.status === 'aktif' ? 'ok' : 'off'}">${m.status}</span></td><td class="acts"><button class="btn sm" data-act="m-edit" data-id="${m.id}">Edit</button><button class="btn sm okb" data-act="m-pts" data-id="${m.id}">Point</button><button class="btn sm" data-act="m-rate" data-id="${m.id}">Rating</button><button class="btn sm danger" data-act="m-del" data-id="${m.id}">Hapus</button></td></tr>`));
+}
+const ATABS = {
+  dash: () => { const n = AD; const items = [[n.members.length, 'Total Anggota'], [n.members.filter(m => m.status === 'aktif').length, 'Anggota Aktif'], [n.recruits.filter(r => r.status === 'menunggu').length, 'Pendaftar Baru'], [n.apparel.length, 'Produk'], [n.docs.length, 'Dokumentasi'], [n.orgRecords.length + n.memberRecords.length, 'Rekor']]; return `<div class="stats">${items.map(x => `<div class="card stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div><h3 class="sec2">Aktivitas Terbaru</h3>${logTbl(AD.log.slice(0, 8))}`; },
+  members: () => `<div class="bar"><input placeholder="Cari nama / email / ID" data-inp="aq" value="${esc(MF.q)}" aria-label="Cari"><select data-chg="aj" aria-label="Filter jabatan"><option value="">Semua jabatan</option>${AD.jabatan.map(j => `<option${j.name === MF.j ? ' selected' : ''}>${esc(j.name)}</option>`).join('')}</select><select data-chg="as" aria-label="Urutkan">${[['id', 'ID ↑'], ['idd', 'ID ↓'], ['pd', 'Point ↓'], ['pa', 'Point ↑']].map(o => `<option value="${o[0]}"${MF.s === o[0] ? ' selected' : ''}>Urut ${o[1]}</option>`).join('')}</select><button class="btn" data-act="m-add">+ TAMBAH ANGGOTA</button></div><div id="mtable">${mtable()}</div>`,
+  rules: () => gen('rules'),
+  share: () => { setTimeout(updateShare, 40); return `<div class="fbox" style="max-width:700px"><h3>🔗 Link Website</h3><label class="fl" for="shareUrl">Link yang dibagikan</label><input id="shareUrl" data-inp="shareurl" value="${esc(shareUrlNow())}" autocomplete="off"><div class="srow"><button class="btn sm" data-act="share-save">💾 Simpan Link</button><button class="btn sm ghost" data-act="share-copy">📋 Salin Link</button></div><p class="warn" id="shareWarn"></p><h3>📱 QR Code</h3><div class="qrw"><canvas id="qrCanvas" width="10" height="10"></canvas></div><p class="muted center" id="qrNote"></p><div class="srow c"><button class="btn sm" data-act="qr-dl">⬇ Download QR (PNG)</button></div><h3>📤 Bagikan</h3><label class="fl" for="shareMsg">Pesan undangan</label><textarea id="shareMsg"></textarea><div class="srow">${[['wa', 'WhatsApp'], ['tg', 'Telegram'], ['x', 'X'], ['fb', 'Facebook'], ['mail', 'Email'], ['sms', 'SMS'], ['native', 'Bagikan…']].map(x => `<button class="btn sm ghost" data-act="share" data-k="${x[0]}">${x[1]}</button>`).join('')}<button class="btn sm ghost" data-act="share-copymsg">📋 Salin Pesan</button></div></div>`; },
+  jabatan: () => gen('jabatan'), org: () => gen('orgRecords'), mrec: () => gen('memberRecords'), apparel: () => gen('apparel'), docs: () => gen('docs'),
+  recruits: () => recruitBar() + tbl(['Tanggal', 'Nama', 'Email', 'WA', 'Jabatan', 'Status', 'Aksi'], AD.recruits.filter(r => !RF || r.status === RF).map(r => `<tr><td>${dt(r.createdAt)}</td><td>${esc(r.name)}</td><td>${esc(r.email)}</td><td>${esc(r.wa || '—')}</td><td>${esc(r.jabatan)}</td><td><span class="badge ${SB[r.status]}">${r.status}</span></td><td class="acts"><button class="btn sm ghost" data-act="r-detail" data-id="${r.id}">Detail</button>${r.status !== 'diterima' ? `<button class="btn sm okb" data-act="r-accept" data-id="${r.id}">Terima</button>${r.status === 'menunggu' ? `<button class="btn sm" data-act="r-status" data-id="${r.id}" data-s="diproses">Proses</button>` : ''}${r.status !== 'ditolak' ? `<button class="btn sm danger" data-act="r-status" data-id="${r.id}" data-s="ditolak">Tolak</button>` : `<button class="btn sm" data-act="r-status" data-id="${r.id}" data-s="menunggu">Buka lagi</button>`}` : ''}<button class="btn sm danger" data-act="r-del" data-id="${r.id}">Hapus</button></td></tr>`)),
+  home: () => { const s = AD.settings; return `<form class="fbox" data-form="settings"><h3>Informasi Halaman Utama</h3>${fh({ k: 'tagline', l: 'Tagline' }, s.tagline)}${fh({ k: 'about', l: 'Tentang NFNC', t: 'textarea' }, s.about)}${fh({ k: 'foundedYear', l: 'Tahun Berdiri', t: 'number' }, s.foundedYear)}${fh({ k: 'announcement', l: 'Pengumuman (kosongkan untuk menyembunyikan)' }, s.announcement)}${fh({ k: 'shopeeUrl', l: 'URL Toko Shopee (cadangan untuk semua produk)', t: 'url' }, s.shopeeUrl)}${fh({ k: 'tokopediaUrl', l: 'URL Toko Tokopedia (cadangan untuk semua produk)', t: 'url' }, s.tokopediaUrl)}<button class="btn full">SIMPAN</button></form>`; },
+  log: () => logTbl(AD.log),
+  backup: () => { setTimeout(async () => { const el = $('#stinfo'); if (!el) return; const s = await Engine.storage(); const mb = x => (x / 1048576).toFixed(1) + ' MB'; el.innerHTML = (s.persisted ? '🔒 Penyimpanan permanen aktif — browser tidak akan menghapus data otomatis.' : '⚠ Browser belum memberi izin penyimpanan permanen; data bisa terhapus bila ruang perangkat penuh.') + ' Terpakai ' + mb(s.usage) + (s.quota ? ' dari ' + mb(s.quota) : '') + '.' + (AD.lastBackup ? ' Cadangan terakhir: ' + dt(AD.lastBackup) + '.' : ' Belum ada cadangan.'); }, 50); return `<div class="fbox"><h3>Cadangan &amp; Pemulihan Data</h3><p class="muted">Seluruh data situs ini tersimpan di browser perangkat ini (IndexedDB). Unduh cadangan secara berkala agar data aman, dan untuk memindahkan situs ke perangkat/browser lain.</p><p class="muted" id="stinfo">Memeriksa penyimpanan…</p><button class="btn full" data-act="bk-export">⬇ UNDUH CADANGAN (.json)</button><button class="btn full ghost" data-act="csv-export">⬇ UNDUH DATA SEMUA ANGGOTA (.csv)</button><label class="fl">Pulihkan dari file cadangan (menimpa semua data saat ini)</label><input type="file" accept="application/json,.json" data-bk="1" aria-label="File cadangan"><p class="muted mt">Catatan: file cadangan berisi hash password anggota — simpan di tempat aman.</p></div>`; }
+};
+const logTbl = l => tbl(['Waktu', 'Oleh', 'Aksi', 'Detail'], l.map(x => `<tr><td>${new Date(x.at).toLocaleString('id-ID')}</td><td>${esc(x.by)}</td><td>${esc(x.action)}</td><td>${esc(x.detail)}</td></tr>`));
+PAGES.admin = async () => { AD = await api('/admin/data'); const lb = AD.lastBackup ? Math.floor((Date.now() - new Date(AD.lastBackup)) / 864e5) : null; const bkWarn = (lb === null || lb >= 7) ? `<p class="notice center bkw" style="margin:0 auto 20px">⚠ ${lb === null ? 'Belum pernah ada cadangan data.' : 'Cadangan terakhir ' + lb + ' hari lalu.'} Buka tab Cadangan lalu unduh file cadangan agar data aman.</p>` : '';
+  return head('ADMIN CONTROL PANEL', 'Kelola Seluruh Website') + bkWarn + `<div class="tabs">${TABS.map(t => `<button class="tab${t[0] === ATAB ? ' on' : ''}" data-act="tab" data-t="${t[0]}">${t[1]}${t[0] === 'recruits' && AD.recruits.some(r => r.status === 'menunggu') ? ' (' + AD.recruits.filter(r => r.status === 'menunggu').length + ')' : ''}</button>`).join('')}</div><div id="atab">${ATABS[ATAB]()}</div>`; };
+async function refreshAdmin() { AD = await api('/admin/data'); PD = await api('/public'); if ($('#atab')) $('#atab').innerHTML = ATABS[ATAB](); }
+function memberForm(m) {
+  const e = !!m; m = m || { memberId: nextId(), status: 'aktif', role: 'member', jabatan: 'Member', joinedAt: today() };
+  return `<form data-form="member" data-id="${e ? m.id : ''}">${fh({ k: 'name', l: 'Nama Lengkap', req: 1 }, m.name)}${fh({ k: 'email', t: 'email', l: 'Email', req: 1 }, m.email)}${fh({ k: 'memberId', l: 'ID Anggota (harus unik)', req: 1 }, m.memberId)}${fh({ k: 'jabatan', l: 'Jabatan', t: 'select', o: AD.jabatan.map(j => j.name) }, m.jabatan)}${fh({ k: 'status', l: 'Status', t: 'select', o: ['aktif', 'nonaktif'] }, m.status)}${fh({ k: 'role', l: 'Role', t: 'select', o: ['member', 'admin'] }, m.role)}${fh({ k: 'joinedAt', l: 'Tanggal Bergabung', t: 'date' }, m.joinedAt)}${fh({ k: 'photo', l: 'Foto Profil', t: 'up', accept: 'image/png,image/jpeg,image/webp,image/gif' }, m.photo)}${fh({ k: 'password', l: e ? 'Password Baru (kosongkan jika tidak diubah)' : 'Password Awal (min. 8 karakter)', t: 'password', req: !e })}<button class="btn full">SIMPAN</button></form>`;
+}
+
+/* ---------- login modal + forms ---------- */
+PAGES.login = async () => (await api('/setup')).needed ? head('SETUP AWAL', 'Buat Akun Administrator Pertama') + `<form class="fbox" data-form="setup"><p class="muted">Belum ada akun. Akun ini otomatis menjadi Administrator dengan ID NFNC-0001. Ingat password Anda — tidak ada reset lewat email.</p>${fh({ k: 'name', l: 'Nama Lengkap', req: 1 })}${fh({ k: 'email', t: 'email', l: 'Email', req: 1, ph: 'nama@email.com' })}${fh({ k: 'password', l: 'Password (min. 8 karakter)', t: 'password', req: 1 })}${fh({ k: 'password2', l: 'Ulangi Password', t: 'password', req: 1 })}<button class="btn full">BUAT AKUN ADMIN</button></form>` : head('LOGIN ANGGOTA', 'Masuk ke Akun NFNC') + `<form class="fbox" data-form="login">${fh({ k: 'email', t: 'email', l: 'Email', req: 1 })}${fh({ k: 'password', l: 'Password', t: 'password', req: 1 })}<button class="btn full">LOGIN</button><p class="muted center mt">Belum jadi anggota? <a class="lnk" href="#/recruit">Daftar lewat halaman Recruit</a>. Akun dibuat oleh Admin setelah pendaftaran diterima.</p></form>`;
+PAGES.awards = async () => {
+  const d = await api('/awards');
+  const li = r => `<div class="card"><p class="muted">📅 ${dt(r.date)}</p><h3>${esc(r.title)}</h3>${r.memberName ? `<p><span class="tid">${esc(r.memberId)}</span> ${esc(r.memberName)}</p>` : ''}<p class="muted">${esc(r.desc)}</p><span class="badge gold">⭐ PENGHARGAAN</span></div>`;
+  return head('PENGHARGAAN', 'Award &amp; Apresiasi NFNC') + `<h3 class="sec">PENGHARGAAN ORGANISASI</h3><div class="grid">${d.org.map(li).join('') || '<p class="muted center">Belum ada penghargaan organisasi.</p>'}</div>` + (d.members ? `<h3 class="sec">PENGHARGAAN ANGGOTA</h3><div class="grid">${d.members.map(li).join('') || '<p class="muted center">Belum ada penghargaan anggota.</p>'}</div>` : '<p class="muted center mt">Login sebagai anggota untuk melihat penghargaan anggota.</p>');
+};
+const afterSave = async msg => { closeModal(); await refreshAdmin(); toast(msg); };
+const credHtml = d => { const own = d.tempPassword === null, u = d.member.email, msg = `Selamat! Pendaftaran Anda di NFNC diterima. ID Anggota: ${d.member.memberId}. Email: ${u}.` + (own ? ' Login dengan password yang Anda buat saat mendaftar.' : ` Password awal: ${d.tempPassword}`);
+  return (own ? '<p class="muted">Anggota login dengan password yang ia buat saat mendaftar (tidak perlu dibagikan).</p>' : '<p class="muted">Berikan kredensial ini ke anggota (password hanya tampil sekali):</p>') + `<div class="cred">Email: ${esc(u)}<br>ID: ${esc(d.member.memberId)}${own ? '' : '<br>Password: ' + esc(d.tempPassword)}</div>` + (d.wa ? `<a class="btn full okb" target="_blank" rel="noopener noreferrer" href="${esc(waLink(d.wa, msg))}">KABARI VIA WHATSAPP</a>` : '') + `<button class="btn full" data-act="copy" data-t="${esc(msg)}">SALIN PESAN</button>`; };
+const FORMS = {
+  login: async f => { ME = (await api('/login', 'POST', formObj(f))).user; const nx = new URLSearchParams((location.hash.split('?')[1]) || '').get('next'); go(PAGES[nx] && nx !== 'login' ? nx : (ME.role === 'admin' ? 'admin' : 'home')); },
+  setup: async f => { const o = formObj(f); if (o.password !== o.password2) throw new Error('Konfirmasi password tidak sama'); ME = (await api('/setup', 'POST', o)).user; toast('Akun Admin dibuat. Selamat datang!'); go('admin'); },
+  rstatus: async f => { const d = await api('/recruit/status', 'POST', formObj(f)); const M = { menunggu: '⏳ Pendaftaran Anda menunggu ditinjau Admin.', diproses: '🔎 Pendaftaran Anda sedang diproses.', diterima: '✅ Selamat, Anda DITERIMA! Silakan login memakai email dan password yang Anda buat saat mendaftar.', ditolak: '❌ Mohon maaf, pendaftaran Anda belum dapat diterima.' }; $('#rres').textContent = d.status ? M[d.status] : 'Email tidak ditemukan di data pendaftaran.'; },
+  recruit: async f => { if (f.password.value !== f.password2.value) throw new Error('Konfirmasi password tidak sama'); await api('/recruit', 'POST', formObj(f)); toast('✅ Pendaftaran terkirim! Admin NFNC akan meninjau pendaftaran Anda.'); $('#view').innerHTML = await PAGES.recruit(); },
+  profile: async f => { await api('/profile', 'PUT', formObj(f)); toast('Data diri tersimpan'); $('#view').innerHTML = await PAGES.profile(); },
+  ratings: async f => { const o = formObj(f); await api('/admin/members/' + f.dataset.id + '/ratings', 'PUT', { ratings: [0, 1, 2, 3, 4].map(i => o['r' + i]) }); await afterSave('Rating tersimpan'); },
+  pw: async f => { await api('/change-password', 'POST', formObj(f)); f.reset(); toast('Password berhasil diganti'); },
+  settings: async f => { await api('/admin/settings', 'PUT', formObj(f)); await refreshAdmin(); toast('Pengaturan tersimpan'); },
+  crud: async f => { const o = formObj(f), col = f.dataset.col, id = f.dataset.id; if (col === 'docs') o.type = isVid(o.file) ? 'video' : 'foto'; await api('/admin/' + col + (id ? '/' + id : ''), id ? 'PUT' : 'POST', o); await afterSave('Tersimpan'); },
+  member: async f => { const id = f.dataset.id; await api('/admin/members' + (id ? '/' + id : ''), id ? 'PUT' : 'POST', formObj(f)); await afterSave('Anggota tersimpan'); },
+  points: async f => { const o = formObj(f); await api('/admin/members/' + f.dataset.id + '/points', 'POST', { delta: o.delta, reason: o.reason }); await afterSave('Point diperbarui'); },
+  accept: async f => { const o = formObj(f); const d = await api('/admin/recruits/' + f.dataset.id + '/accept', 'POST', o); await refreshAdmin(); modal('PENDAFTARAN DITERIMA', `<p>Akun <b>${esc(d.member.email)}</b> dengan ID <b>${esc(d.member.memberId)}</b> sudah dibuat.</p>${credHtml(d)}`); }
+};
+const CHG = {
+  rf: el => { RF = el.value; $('#atab').innerHTML = ATABS.recruits(); },
+  docf: el => { DF = el.value; $('#dgrid').innerHTML = docGrid(); },
+  mj: el => { PF.j = el.value; $('#mgrid').innerHTML = mgrid(); },
+  aj: el => { MF.j = el.value; $('#mtable').innerHTML = mtable(); },
+  as: el => { MF.s = el.value; $('#mtable').innerHTML = mtable(); }
+};
+const INP = { shareurl: () => updateShare(), mq: v => { PF.q = v; $('#mgrid').innerHTML = mgrid(); }, aq: v => { MF.q = v; $('#mtable').innerHTML = mtable(); } };
+const byId = (arr, id) => arr.find(x => x.id === +id);
+const ACT = {
+  burger: () => $('#nav').classList.toggle('open'),
+  close: () => closeModal(),
+  logout: async () => { await api('/logout', 'POST'); ME = null; go('home'); },
+  zoom: el => modal('Foto', `<img class="zoom" src="${esc(el.dataset.src)}" alt="">`),
+  member: async el => { const d = await api('/members/' + el.dataset.id); modal(d.member.name, mview(d)); },
+  tab: el => { ATAB = el.dataset.t; document.querySelectorAll('.tab').forEach(b => b.classList.toggle('on', b === el)); $('#atab').innerHTML = ATABS[ATAB](); },
+  'm-add': () => modal('TAMBAH ANGGOTA', memberForm()),
+  'm-edit': el => modal('EDIT ANGGOTA', memberForm(byId(AD.members, el.dataset.id))),
+  'm-pts': el => { const m = byId(AD.members, el.dataset.id), h = AD.points.filter(p => p.memberRef === m.id).slice(0, 8); modal('POINT — ' + m.name, `<p>Point saat ini: <b class="plus">${m.points}</b></p><form data-form="points" data-id="${m.id}"><label class="fl">Jumlah (positif = tambah, negatif = kurang)</label><input name="delta" type="number" required placeholder="contoh: 10 atau -5"><label class="fl">Alasan</label><input name="reason" maxlength="100" placeholder="mis. Juara turnamen"><button class="btn full">SIMPAN POINT</button></form><h3 class="sec2">Riwayat Terakhir</h3>${h.length ? `<ul class="list">${h.map(p => `<li><b class="${p.delta > 0 ? 'plus' : 'minus'}">${p.delta > 0 ? '+' : ''}${p.delta}</b> • saldo ${p.balance} • <span class="muted">${dt(p.at)} ${esc(p.reason)} (${esc(p.by)})</span></li>`).join('')}</ul>` : '<p class="muted">Belum ada riwayat.</p>'}`); },
+  'm-del': async el => { const m = byId(AD.members, el.dataset.id); if (!confirm(`Hapus anggota ${m.name} beserta rekor dan riwayat Point-nya?`)) return; await api('/admin/members/' + m.id, 'DELETE'); await refreshAdmin(); toast('Anggota dihapus'); },
+  'c-add': el => { const col = el.dataset.col, g = cfg(col); modal('TAMBAH ' + g.t.toUpperCase(), `<form data-form="crud" data-col="${col}" data-id="">${g.f.map(f => fh(f, f.t === 'date' ? today() : '')).join('')}<button class="btn full">SIMPAN</button></form>`); },
+  'c-edit': el => { const col = el.dataset.col, g = cfg(col), r = byId(AD[col], el.dataset.id); modal('EDIT ' + g.t.toUpperCase(), `<form data-form="crud" data-col="${col}" data-id="${r.id}">${g.f.map(f => fh(f, r[f.k] ?? '')).join('')}<button class="btn full">SIMPAN</button></form>`); },
+  'c-del': async el => { if (!confirm('Hapus data ini?')) return; await api('/admin/' + el.dataset.col + '/' + el.dataset.id, 'DELETE'); await refreshAdmin(); toast('Data dihapus'); },
+  'r-detail': el => { const r = byId(AD.recruits, el.dataset.id); modal('PENDAFTAR — ' + r.name, `${r.photo ? `<img class="zoom" src="${esc(r.photo)}" alt="">` : ''}<p><b>Email:</b> ${esc(r.email)}</p><p><b>Jabatan dilamar:</b> ${esc(r.jabatan)}</p><p><b>No. WhatsApp:</b> ${esc(r.wa || '—')}</p>${r.wa ? `<a class="btn sm okb" target="_blank" rel="noopener noreferrer" href="${esc(waLink(r.wa))}">Chat WhatsApp</a>` : ''}<p><b>Status:</b> ${esc(r.status)}</p><p><b>Tanggal:</b> ${dt(r.createdAt)}</p><h3 class="sec2">Alasan Bergabung</h3><p>${esc(r.reason)}</p><h3 class="sec2">Informasi Tambahan</h3><p>${esc(r.info) || '—'}</p>`); },
+  'r-accept': el => { const r = byId(AD.recruits, el.dataset.id); modal('TERIMA — ' + r.name, `<form data-form="accept" data-id="${r.id}">${fh({ k: 'memberId', l: 'ID Anggota Resmi (unik)', req: 1 }, nextId())}${fh({ k: 'jabatan', l: 'Jabatan', t: 'select', o: AD.jabatan.map(j => j.name) }, r.jabatan)}${fh({ k: 'password', l: 'Password awal (kosongkan = pakai password buatan pendaftar)', t: 'password' })}<button class="btn full">TERIMA &amp; BUAT AKUN</button></form>`); },
+  'r-status': async el => { await api('/admin/recruits/' + el.dataset.id, 'PUT', { status: el.dataset.s }); await refreshAdmin(); toast('Status diubah'); },
+  'r-del': async el => { if (!confirm('Hapus data pendaftaran ini?')) return; await api('/admin/recruits/' + el.dataset.id, 'DELETE'); await refreshAdmin(); toast('Dihapus'); },
+  'up-clear': el => { const b = el.closest('.up'); b.querySelector('input[type=hidden]').value = ''; b.querySelector('.prev').innerHTML = prev(''); },
+  'bk-export': async () => { const d = await api('/admin/backup'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(d)], { type: 'application/json' })); a.download = 'nfnc-backup-' + today() + '.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); toast('Cadangan diunduh'); const w = document.querySelector('.bkw'); if (w) w.remove(); },
+  'csv-export': async () => { const rows = await api('/admin/export'); const cols = ['email', 'name', 'memberId', 'jabatan', 'role', 'status', 'joinedAt', 'points', 'nick', 'nama', 'umur', 'wa', 'alamat', 'bio', 'rating']; const q = v => { v = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; }; const csv = '\ufeff' + cols.join(',') + '\r\n' + rows.map(r => cols.map(c => q(r[c])).join(',')).join('\r\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = 'nfnc-anggota-' + today() + '.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); toast('Data anggota diunduh'); },
+  copy: async el => { try { await navigator.clipboard.writeText(el.dataset.t); toast('Tersalin'); } catch (e) { toast('Salin manual dari kotak di atas', 1); } }
+};
+async function uploadFile(el) {
+  const f = el.files[0]; if (!f) return;
+  const vid = f.type.startsWith('video/'), lim = el.dataset.up === 'recruit' ? 2e6 : vid ? 30e6 : 5e6;
+  if (!/^(image\/(png|jpeg|webp|gif)|video\/(mp4|webm))$/.test(f.type)) { el.value = ''; return toast('Tipe file tidak didukung', 1); }
+  if (f.size > lim) { el.value = ''; return toast('File terlalu besar (maks. ' + lim / 1e6 + ' MB)', 1); }
+  const box = el.closest('.up'); box.classList.add('busy');
+  try {
+    const du = await new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = () => no(new Error('Gagal membaca file')); r.readAsDataURL(f); });
+    const d = await api('/upload?scope=' + el.dataset.up, 'POST', { dataUrl: du });
+    box.querySelector('input[type=hidden]').value = d.url; box.querySelector('.prev').innerHTML = prev(d.url);
+  } catch (e) { toast(e.message, 1); }
+  box.classList.remove('busy'); el.value = '';
+}
+
+
+/* ---------- QR code (dari file asli) + berbagi ---------- */
+var QR = (function(){
+  var ECC = {L:[-1,7,10,15,20,26,18,20,24,30,18], M:[-1,10,16,26,18,24,16,18,22,22,26]};
+  var BLK = {L:[-1,1,1,1,1,1,2,2,2,2,4], M:[-1,1,1,1,2,2,4,4,4,5,5]};
+  var FMT = {L:1, M:0};
+  function rawMods(v){
+    var r = (16*v+128)*v+64;
+    if(v>=2){ var n = Math.floor(v/7)+2; r -= (25*n-10)*n-55; if(v>=7) r -= 36; }
+    return r;
+  }
+  function dataCw(v,e){ return Math.floor(rawMods(v)/8) - ECC[e][v]*BLK[e][v]; }
+  function gmul(x,y){ var z=0; for(var i=7;i>=0;i--){ z=(z<<1)^((z>>>7)*0x11D); z^=((y>>>i)&1)*x; } return z; }
+  function rsDiv(deg){
+    var r=[], i, j; for(i=0;i<deg-1;i++) r.push(0); r.push(1);
+    var root=1;
+    for(i=0;i<deg;i++){ for(j=0;j<r.length;j++){ r[j]=gmul(r[j],root); if(j+1<r.length) r[j]^=r[j+1]; } root=gmul(root,2); }
+    return r;
+  }
+  function rsRem(data,div){
+    var r = div.map(function(){return 0;});
+    data.forEach(function(b){ var f=b^r.shift(); r.push(0); div.forEach(function(c,i){ r[i]^=gmul(c,f); }); });
+    return r;
+  }
+  function bit(x,i){ return ((x>>>i)&1)!==0; }
+  function make(text){
+    var bytes = unescape(encodeURIComponent(text)).split('').map(function(c){ return c.charCodeAt(0); });
+    var e, v, ok = false;
+    for(var ei=0; ei<2 && !ok; ei++){
+      e = ei===0 ? 'M' : 'L';
+      for(v=1; v<=10; v++){
+        var cc = v<10 ? 8 : 16;
+        if(4+cc+8*bytes.length <= dataCw(v,e)*8){ ok = true; break; }
+      }
+    }
+    if(!ok) return null;
+    var bits = [];
+    function put(val,len){ for(var i=len-1;i>=0;i--) bits.push((val>>>i)&1); }
+    put(4,4); put(bytes.length, v<10?8:16); bytes.forEach(function(b){ put(b,8); });
+    var cap = dataCw(v,e)*8;
+    put(0, Math.min(4, cap-bits.length));
+    while(bits.length%8) bits.push(0);
+    var pad = 0xEC; while(bits.length<cap){ put(pad,8); pad ^= 0xEC^0x11; }
+    var data = [], i, j;
+    for(i=0;i<bits.length;i+=8){ var b=0; for(j=0;j<8;j++) b=(b<<1)|bits[i+j]; data.push(b); }
+    // blocks + interleave
+    var nb = BLK[e][v], eccLen = ECC[e][v], raw = Math.floor(rawMods(v)/8);
+    var nShort = nb - raw%nb, shortLen = Math.floor(raw/nb), div = rsDiv(eccLen), blocks = [], k = 0;
+    for(i=0;i<nb;i++){
+      var dl = shortLen-eccLen+(i<nShort?0:1), dat = data.slice(k,k+dl); k+=dl;
+      var ecc = rsRem(dat,div); if(i<nShort) dat.push(0);
+      blocks.push(dat.concat(ecc));
+    }
+    var all = [];
+    for(i=0;i<blocks[0].length;i++) blocks.forEach(function(bl,jj){ if(i!==shortLen-eccLen || jj>=nShort) all.push(bl[i]); });
+    // matrix
+    var size = v*4+17, m = [], fn = [];
+    for(i=0;i<size;i++){ m.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+    function setF(x,y,d){ m[y][x]=d; fn[y][x]=true; }
+    function finder(cx,cy){ for(var dy=-4;dy<=4;dy++) for(var dx=-4;dx<=4;dx++){ var d=Math.max(Math.abs(dx),Math.abs(dy)), xx=cx+dx, yy=cy+dy; if(xx>=0&&xx<size&&yy>=0&&yy<size) setF(xx,yy,d!==2&&d!==4); } }
+    function align(cx,cy){ for(var dy=-2;dy<=2;dy++) for(var dx=-2;dx<=2;dx++) setF(cx+dx,cy+dy,Math.max(Math.abs(dx),Math.abs(dy))!==1); }
+    function fmtBits(mask){
+      var d = (FMT[e]<<3)|mask, r = d;
+      for(var q=0;q<10;q++) r=(r<<1)^((r>>>9)*0x537);
+      var bt = ((d<<10)|r)^0x5412, q2;
+      for(q2=0;q2<=5;q2++) setF(8,q2,bit(bt,q2));
+      setF(8,7,bit(bt,6)); setF(8,8,bit(bt,7)); setF(7,8,bit(bt,8));
+      for(q2=9;q2<15;q2++) setF(14-q2,8,bit(bt,q2));
+      for(q2=0;q2<8;q2++) setF(size-1-q2,8,bit(bt,q2));
+      for(q2=8;q2<15;q2++) setF(8,size-15+q2,bit(bt,q2));
+      setF(8,size-8,true);
+    }
+    for(i=0;i<size;i++){ setF(6,i,i%2===0); setF(i,6,i%2===0); }
+    finder(3,3); finder(size-4,3); finder(3,size-4);
+    var na = v===1 ? 0 : Math.floor(v/7)+2, pos = [];
+    if(na){
+      var step = Math.ceil((v*4+4)/(na*2-2))*2; pos=[6];
+      for(i=0,j=size-7;i<na-1;i++,j-=step) pos.splice(1,0,j);
+      for(i=0;i<na;i++) for(j=0;j<na;j++) if(!((i===0&&j===0)||(i===0&&j===na-1)||(i===na-1&&j===0))) align(pos[i],pos[j]);
+    }
+    fmtBits(0);
+    if(v>=7){
+      var r = v; for(i=0;i<12;i++) r=(r<<1)^((r>>>11)*0x1F25);
+      var vb = (v<<12)|r;
+      for(i=0;i<18;i++){ var cl=bit(vb,i), a=size-11+i%3, bb=Math.floor(i/3); setF(a,bb,cl); setF(bb,a,cl); }
+    }
+    // codewords
+    var bi = 0, right, vert, jj, x, y, up;
+    for(right=size-1; right>=1; right-=2){
+      if(right===6) right=5;
+      for(vert=0; vert<size; vert++) for(jj=0;jj<2;jj++){
+        x=right-jj; up=((right+1)&2)===0; y=up?size-1-vert:vert;
+        if(!fn[y][x] && bi<all.length*8){ m[y][x]=bit(all[bi>>>3],7-(bi&7)); bi++; }
+      }
+    }
+    function mask(mk){
+      for(var yy=0;yy<size;yy++) for(var xx=0;xx<size;xx++){
+        var inv;
+        switch(mk){
+          case 0: inv=(xx+yy)%2===0; break;
+          case 1: inv=yy%2===0; break;
+          case 2: inv=xx%3===0; break;
+          case 3: inv=(xx+yy)%3===0; break;
+          case 4: inv=(Math.floor(xx/3)+Math.floor(yy/2))%2===0; break;
+          case 5: inv=xx*yy%2+xx*yy%3===0; break;
+          case 6: inv=(xx*yy%2+xx*yy%3)%2===0; break;
+          default: inv=((xx+yy)%2+xx*yy%3)%2===0;
+        }
+        if(!fn[yy][xx] && inv) m[yy][xx]=!m[yy][xx];
+      }
+    }
+    function penalty(){
+      var p=0, a, b, run, dark=0;
+      for(a=0;a<size;a++){
+        for(var dir=0;dir<2;dir++){
+          run=1;
+          for(b=1;b<size;b++){
+            var c1 = dir? m[b][a]:m[a][b], c0 = dir? m[b-1][a]:m[a][b-1];
+            if(c1===c0){ run++; if(run===5) p+=3; else if(run>5) p++; } else run=1;
+          }
+        }
+      }
+      for(a=0;a<size-1;a++) for(b=0;b<size-1;b++){ var c=m[a][b]; if(c===m[a][b+1]&&c===m[a+1][b]&&c===m[a+1][b+1]) p+=3; }
+      for(a=0;a<size;a++) for(b=0;b<size;b++) if(m[a][b]) dark++;
+      p += Math.floor(Math.abs(dark*20-size*size*10)/(size*size))*10;
+      return p;
+    }
+    var best=0, bestP=1e9;
+    for(var mk=0;mk<8;mk++){ mask(mk); fmtBits(mk); var pp=penalty(); if(pp<bestP){ bestP=pp; best=mk; } mask(mk); }
+    mask(best); fmtBits(best);
+    return {size:size, modules:m};
+  }
+  return {make:make};
+})();
+let lastDefaultMsg = '';
+const shareUrlNow = () => (PD && PD.settings.shareUrl) || location.href.split('#')[0].split('?')[0];
+const defaultMsg = u => 'Gabung NFNC Esports — Never Forget Never Compromise!\nDaftar sekarang di: ' + u;
+const isLocalUrl = u => /^(file:|blob:|about:)/i.test(u) || /^https?:\/\/(localhost|127\.|10\.|192\.168\.)/i.test(u);
+function updateShare() {
+  const el = $('#shareUrl'); if (!el) return;
+  const u = el.value.trim(), msg = $('#shareMsg'), dm = defaultMsg(u);
+  if (!msg.value || msg.value === lastDefaultMsg) msg.value = dm;
+  lastDefaultMsg = dm;
+  $('#shareWarn').textContent = (u && isLocalUrl(u)) ? '⚠️ Ini alamat lokal, hanya bisa dibuka di perangkat Anda. Upload website ke hosting, lalu tempel link publiknya di atas.' : '';
+  drawQR(u);
+}
+function drawQR(u) {
+  const cv = $('#qrCanvas'), ctx = cv.getContext('2d'), r = u ? QR.make(u) : null, note = $('#qrNote');
+  if (!r) { cv.width = cv.height = 10; ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, 10, 10); note.textContent = u ? 'Link terlalu panjang untuk QR (maksimal sekitar 210 karakter).' : 'Isi link terlebih dahulu.'; return; }
+  const sc = 8, q = 4, px = (r.size + q * 2) * sc;
+  cv.width = cv.height = px; ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, px, px); ctx.fillStyle = '#000';
+  for (let y = 0; y < r.size; y++) for (let x = 0; x < r.size; x++) if (r.modules[y][x]) ctx.fillRect((x + q) * sc, (y + q) * sc, sc, sc);
+  note.textContent = 'Scan QR ini untuk membuka: ' + u;
+}
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); toast('📋 Tersalin!'); }
+  catch (e) { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('📋 Tersalin!'); } catch (e2) { toast('Salin manual: ' + t, 1); } ta.remove(); }
+}
+Object.assign(ACT, {
+  'm-rate': async el => { const m = byId(AD.members, el.dataset.id), d = await api('/members/' + m.id); modal('RATING — ' + m.name, `<form data-form="ratings" data-id="${m.id}">${d.ratingNames.map((n, i) => `<label class="fl">${esc(n)} (0-100)</label><input name="r${i}" type="number" min="0" max="100" value="${d.ratings[i]}" required>`).join('')}<button class="btn full">SIMPAN RATING</button></form>`); },
+  'share-save': async () => { await api('/admin/settings', 'PUT', { shareUrl: $('#shareUrl').value.trim() }); await refreshAdmin(); toast('✅ Link disimpan'); },
+  'share-copy': () => copyText($('#shareUrl').value.trim()),
+  'share-copymsg': () => copyText($('#shareMsg').value),
+  'qr-dl': () => { const cv = $('#qrCanvas'); if (cv.width <= 10) throw new Error('QR belum tersedia. Isi link terlebih dahulu.'); const a = document.createElement('a'); a.href = cv.toDataURL('image/png'); a.download = 'nfnc-qr.png'; document.body.appendChild(a); a.click(); a.remove(); },
+  share: el => {
+    const url = $('#shareUrl').value.trim(), msg = $('#shareMsg').value.trim();
+    if (!url) throw new Error('Isi link terlebih dahulu.');
+    if (isLocalUrl(url) && !confirm('Link ini adalah alamat lokal yang tidak bisa dibuka orang lain. Tetap lanjutkan?')) return;
+    const plain = msg.split(url).join('').trim(), enc = encodeURIComponent, full = msg.indexOf(url) < 0 ? (msg ? msg + '\n' : '') + url : msg, k = el.dataset.k;
+    const links = { wa: 'https://wa.me/?text=' + enc(full), tg: 'https://t.me/share/url?url=' + enc(url) + '&text=' + enc(plain), x: 'https://twitter.com/intent/tweet?text=' + enc(plain) + '&url=' + enc(url), fb: 'https://www.facebook.com/sharer/sharer.php?u=' + enc(url) };
+    if (links[k]) { window.open(links[k], '_blank', 'noopener'); return; }
+    if (k === 'mail') { location.href = 'mailto:?subject=' + enc('Undangan NFNC Esports') + '&body=' + enc(full); return; }
+    if (k === 'sms') { location.href = 'sms:?&body=' + enc(full); return; }
+    if (navigator.share) navigator.share({ title: 'NFNC Esports', text: plain, url }).catch(() => {}); else throw new Error('Browser ini belum mendukung menu Bagikan bawaan. Gunakan tombol lain atau salin link.');
+  }
+});
+
+/* ---------- event wiring ---------- */
+document.addEventListener('click', e => {
+  if (e.target.id === 'modal') return closeModal();
+  const el = e.target.closest('[data-act]');
+  if (el && ACT[el.dataset.act]) run(ACT[el.dataset.act])(el);
+});
+document.addEventListener('submit', e => {
+  const f = e.target.closest('form[data-form]'); if (!f) return;
+  e.preventDefault();
+  const b = f.querySelector('button:not([type=button])'); if (b) b.disabled = true;
+  run(FORMS[f.dataset.form])(f).finally(() => { if (b) b.disabled = false; });
+});
+document.addEventListener('change', e => { const t = e.target; if (t.dataset.chg && CHG[t.dataset.chg]) CHG[t.dataset.chg](t); if (t.dataset.up) run(uploadFile)(t); if (t.dataset.bk) run(restoreFile)(t); });
+async function restoreFile(el) {
+  const f = el.files[0]; if (!f) return; el.value = '';
+  let d; try { d = JSON.parse(await f.text()); } catch (e) { throw new Error('File bukan JSON yang valid'); }
+  if (!confirm('Timpa SEMUA data saat ini dengan isi file cadangan "' + f.name + '"?')) return;
+  await api('/admin/restore', 'POST', { data: d }); await refreshAdmin(); toast('Data berhasil dipulihkan');
+}
+document.addEventListener('input', e => { const t = e.target; if (t.dataset.inp && INP[t.dataset.inp]) INP[t.dataset.inp](t.value); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+let RT = 0;
+async function route() {
+  const my = ++RT;
+  try {
+    const h = location.hash.replace(/^#\/?/, '').split('?')[0] || 'home';
+    const pg = PAGES[h] ? h : 'home';
+    PD = await api('/public'); ME = (await api('/me')).user;
+    if (my !== RT) return;
+    PAGE = pg; NEED = NEEDS[pg] || '';
+    if (NEED && !ME) { go('login', 'next=' + pg); return; }
+    if (NEED === 'admin' && ME.role !== 'admin') { toast('⛔ Akses ditolak. Menu ini hanya untuk Admin.', 1); go('home'); return; }
+    if (pg === 'login' && ME) { go(ME.role === 'admin' ? 'admin' : 'profile'); return; }
+    document.title = TITLES[pg] + ' — NFNC Esports';
+    renderNav(); $('#nav').classList.remove('open');
+    const html = await PAGES[pg]();
+    if (my !== RT) return;
+    $('#view').innerHTML = html; window.scrollTo(0, 0);
+  } catch (e) { $('#view').innerHTML = `<p class="err">Gagal memuat data: ${esc(e.message)}</p>`; }
+}
+window.addEventListener('hashchange', route);
+window.addEventListener('nfnc-nopersist', () => toast('⚠ Penyimpanan browser tidak tersedia — data hilang saat halaman ditutup.', 1));
+Engine.init().then(route);
+
+</script>
+<script>
+/* ===== Pendaftaran langsung aktif + anggota online (Firebase Firestore REST) ===== */
+const FB = { projectId: '', apiKey: '', adminEmail: '' }; /* ISI dari Firebase Console */
+const FB_ON = () => !!(FB.projectId && FB.apiKey && FB.adminEmail);
+const fsDocs = () => `projects/${FB.projectId}/databases/(default)/documents`;
+const fsUrl = () => `https://firestore.googleapis.com/v1/${fsDocs()}`;
+const sha = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
+const toF = o => { const f = {}; for (const k in o) f[k] = { stringValue: String(o[k] == null ? '' : o[k]) }; return f; };
+const fromF = d => { const o = {}; for (const k in (d.fields || {})) o[k] = d.fields[k].stringValue || ''; return o; };
+async function fbReq(url, opt = {}) {
+  const r = await fetch(url, { ...opt, headers: { 'Content-Type': 'application/json', ...(opt.headers || {}) } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error((j.error && j.error.message) || 'Gagal terhubung ke Firebase'); e.status = r.status; throw e; }
+  return j;
+}
+let FB_TOKEN = '', FB_EXP = 0;
+async function fbAuth() {
+  if (!FB_TOKEN || Date.now() > FB_EXP) {
+    const pw = prompt('Password akun Admin Firebase (' + FB.adminEmail + '):'); if (!pw) throw new Error('Login Firebase dibatalkan');
+    const j = await fbReq(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FB.apiKey}`, { method: 'POST', body: JSON.stringify({ email: FB.adminEmail, password: pw, returnSecureToken: true }) });
+    FB_TOKEN = j.idToken; FB_EXP = Date.now() + 50 * 60000;
+  }
+  return { Authorization: 'Bearer ' + FB_TOKEN };
+}
+const enter = () => go(ME.role === 'admin' ? 'admin' : 'profile');
+const _login = FORMS.login;
+FORMS.login = async f => {
+  if (!FB_ON()) return _login(f);
+  const o = formObj(f), email = String(o.email || '').trim().toLowerCase(); let rec = null;
+  try { rec = fromF(await fbReq(`${fsUrl()}/members/${await sha(email)}`)); } catch (e) { /* 404 / offline: coba login lokal */ }
+  if (!rec) return _login(f);
+  ME = (await api('/online/login', 'POST', { rec, password: o.password })).user; toast('Selamat datang, ' + ME.name); enter();
+};
+FORMS.recruit = async f => {
+  const o = formObj(f), email = String(o.email || '').trim().toLowerCase();
+  if (String(o.password).length < 8) throw new Error('Password minimal 8 karakter');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) throw new Error('Email tidak valid');
+  if (!/^[0-9+\-\s]{8,20}$/.test(o.wa || '')) throw new Error('No. WhatsApp tidak valid');
+  if (!String(o.name || '').trim()) throw new Error('Nama wajib diisi');
+  if (!FB_ON()) { ME = (await api('/register-local', 'POST', { name: o.name, email, wa: o.wa, password: o.password })).user; toast('✅ Pendaftaran berhasil! ID Anda: ' + ME.memberId); return enter(); }
+  const id = await sha(email), pass = await Engine.hash(o.password);
+  let rec = null;
+  for (let t = 0; t < 6 && !rec; t++) {
+    const mid = 'NFNC-' + (1000 + Math.floor(Math.random() * 9000)), r = { name: o.name.trim().slice(0, 60), email, wa: o.wa, jabatan: 'Member', memberId: mid, role: 'member', status: 'aktif', points: '0', joinedAt: new Date().toISOString().slice(0, 10), pass };
+    try {
+      await fbReq(`${fsUrl()}:commit`, { method: 'POST', body: JSON.stringify({ writes: [
+        { update: { name: `${fsDocs()}/members/${id}`, fields: toF(r) }, currentDocument: { exists: false } },
+        { update: { name: `${fsDocs()}/ids/${mid}`, fields: toF({ email }) }, currentDocument: { exists: false } }] }) });
+      rec = r;
+    } catch (e) {
+      if (e.status === 409 || /ALREADY_EXISTS/.test(e.message)) { if (/\/members\//.test(e.message)) throw new Error('Email ini sudah terdaftar. Silakan login.'); continue; }
+      throw e;
+    }
+  }
+  if (!rec) throw new Error('Gagal membuat ID anggota, coba lagi.');
+  ME = (await api('/online/login', 'POST', { rec, password: o.password })).user;
+  toast('✅ Pendaftaran berhasil! ID Anda: ' + rec.memberId); enter();
+};
+async function pushM(m, pw) {
+  if (!FB_ON() || !m) return;
+  try {
+    const h = await fbAuth(), fl = { name: m.name, jabatan: m.jabatan, status: m.status, role: m.role, memberId: m.memberId, points: m.points };
+    if (pw) fl.pass = await Engine.hash(pw);
+    const mask = Object.keys(fl).map(k => 'updateMask.fieldPaths=' + k).join('&');
+    await fbReq(`${fsUrl()}/members/${await sha(String(m.email).toLowerCase())}?${mask}&currentDocument.exists=true`, { method: 'PATCH', headers: h, body: JSON.stringify({ fields: toF(fl) }) });
+  } catch (e) { if (e.status !== 404) toast('⚠ Perubahan belum tersimpan online: ' + e.message); }
+}
+const _fm = FORMS.member, _fp = FORMS.points, _md = ACT['m-del'];
+FORMS.member = async f => { const id = f.dataset.id, pw = f.password && f.password.value; await _fm(f); if (id) await pushM(AD.members.find(x => x.id === +id), pw); };
+FORMS.points = async f => { const id = f.dataset.id; await _fp(f); await pushM(AD.members.find(x => x.id === +id)); };
+ACT['m-del'] = async el => {
+  const m = AD.members.find(x => x.id === +el.dataset.id); await _md(el);
+  if (FB_ON() && m && !AD.members.some(x => x.id === m.id)) { try { await fbReq(`${fsUrl()}/members/${await sha(String(m.email).toLowerCase())}`, { method: 'DELETE', headers: await fbAuth() }); } catch (e) { toast('⚠ Gagal hapus online: ' + e.message); } }
+};
+ACT['m-sync'] = async () => {
+  if (!FB_ON()) throw new Error('Firebase belum diisi di file (bagian const FB).');
+  const h = await fbAuth(); let items = [], tok = '';
+  do { const j = await fbReq(`${fsUrl()}/members?pageSize=100${tok ? '&pageToken=' + tok : ''}`, { headers: h }); items.push(...(j.documents || []).map(fromF)); tok = j.nextPageToken || ''; } while (tok);
+  const r = await api('/admin/members/import', 'POST', { items }); await refreshAdmin(); toast(r.added + ' anggota baru diambil dari online');
+};
+const _am = ATABS.members;
+ATABS.members = () => _am().replace('<button class="btn" data-act="m-add">', '<button class="btn" data-act="m-sync">⟳ AMBIL ANGGOTA ONLINE</button><button class="btn" data-act="m-add">');
+ATABS.recruits = () => `<div class="fbox"><h3>Pesan untuk Anggota</h3><label class="fl">Isi pesan (dipakai tombol WA dan Email)</label><textarea id="rmsg" rows="3" placeholder="Halo, ..."></textarea><div class="acts"><button class="btn" data-act="m-sync">⟳ AMBIL PENDAFTAR ONLINE</button><button class="btn okb" data-act="rc-mailall">✉ Email Semua Anggota Aktif</button></div></div>` +
+  tbl(['Daftar', 'Nama', 'Email', 'WA', 'ID', 'Jabatan', 'Akses', 'Status', 'Aksi'], AD.members.map(m => `<tr><td>${dt(m.joinedAt)}</td><td>${esc(m.name)}</td><td>${esc(m.email)}</td><td>${esc(m.wa || '—')}</td><td>${esc(m.memberId)}</td><td>${esc(m.jabatan)}</td><td><span class="badge ${m.role === 'admin' ? 'adm' : 'mem'}">${m.role === 'admin' ? 'ADMIN' : 'MEMBER'}</span></td><td><span class="badge ${m.status === 'aktif' ? 'ok' : 'off'}">${m.status}</span></td><td class="acts"><button class="btn sm" data-act="rc-access" data-id="${m.id}">Jabatan &amp; Akses</button>${m.wa ? `<button class="btn sm okb" data-act="rc-wa" data-id="${m.id}">WA</button>` : ''}<button class="btn sm ghost" data-act="rc-mail" data-id="${m.id}">Email</button></td></tr>`));
+const rcMsg = () => (($('#rmsg') || {}).value || '').trim();
+const rcSubj = 'Info dari NFNC Esports';
+ACT['rc-access'] = el => { const m = byId(AD.members, el.dataset.id); modal('JABATAN & AKSES — ' + m.name, `<form data-form="access" data-id="${m.id}">${fh({ k: 'jabatan', l: 'Jabatan', t: 'select', o: AD.jabatan.map(j => j.name) }, m.jabatan)}${fh({ k: 'role', l: 'Akses (Admin = akses penuh Admin Panel)', t: 'select', o: ['member', 'admin'] }, m.role)}${fh({ k: 'status', l: 'Status akun', t: 'select', o: ['aktif', 'nonaktif'] }, m.status)}<button class="btn full">SIMPAN</button></form>`); };
+FORMS.access = async f => {
+  const id = +f.dataset.id, m = byId(AD.members, id), o = formObj(f);
+  await api('/admin/members/' + id, 'PUT', { name: m.name, email: m.email, memberId: m.memberId, joinedAt: m.joinedAt, photo: m.photo || '', jabatan: o.jabatan, role: o.role, status: o.status });
+  await afterSave('Jabatan & akses diperbarui'); await pushM(AD.members.find(x => x.id === id));
+};
+ACT['rc-wa'] = el => { const m = byId(AD.members, el.dataset.id); window.open(waLink(m.wa, rcMsg() || 'Halo ' + m.name + ', ini Admin NFNC.'), '_blank', 'noopener'); };
+ACT['rc-mail'] = el => { const m = byId(AD.members, el.dataset.id); location.href = 'mailto:' + m.email + '?subject=' + encodeURIComponent(rcSubj) + '&body=' + encodeURIComponent(rcMsg() || 'Halo ' + m.name + ','); };
+ACT['rc-mailall'] = () => { const to = AD.members.filter(m => m.status === 'aktif').map(m => m.email); if (!to.length) throw new Error('Belum ada anggota aktif'); location.href = 'mailto:?bcc=' + encodeURIComponent(to.join(',')) + '&subject=' + encodeURIComponent(rcSubj) + '&body=' + encodeURIComponent(rcMsg()); };
+const _pr = PAGES.recruit, _pl = PAGES.login;
+PAGES.recruit = async () => head('JOIN NFNC', 'Daftar Akun Anggota') + `<form class="fbox" data-form="recruit">${fh({ k: 'name', l: 'Nama', req: 1 })}${fh({ k: 'email', t: 'email', l: 'Email', req: 1, ph: 'nama@email.com' })}${fh({ k: 'wa', l: 'No. WhatsApp', t: 'tel', req: 1, ph: '08xxxxxxxxxx' })}${fh({ k: 'password', l: 'Password (min. 8 karakter)', t: 'password', req: 1 })}<button class="btn full">DAFTAR &amp; LANGSUNG MASUK</button></form>`;
+PAGES.login = async () => {
+  if (FB_ON() && !location.hash.includes('setup=1') && (await api('/setup')).needed)
+    return head('LOGIN ANGGOTA', 'Masuk ke Akun NFNC') + `<form class="fbox" data-form="login">${fh({ k: 'email', t: 'email', l: 'Email', req: 1 })}${fh({ k: 'password', l: 'Password', t: 'password', req: 1 })}<button class="btn full">LOGIN</button><p class="muted center mt">Belum punya akun? <a class="lnk" href="#/recruit">Daftar di sini</a>. Akun langsung aktif.</p><p class="muted center"><a class="lnk" href="#/login?setup=1">Setup awal (khusus pemilik web)</a></p></form>`;
+  return (await _pl()).replace('Akun dibuat oleh Admin setelah pendaftaran diterima.', 'Akun langsung aktif setelah mendaftar.');
+};
+</script>
+
+</body>
+</html>
